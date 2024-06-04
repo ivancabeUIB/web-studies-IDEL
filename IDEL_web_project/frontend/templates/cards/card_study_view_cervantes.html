@@ -1,0 +1,48 @@
+---
+import Header from '../components/Header.astro';
+import Menu from '../components/Menu.astro';
+import Footer from '../components/Footer.astro';
+import Card from '../components/Card.astro';
+import Layout from '../layouts/Layout.astro';
+
+import { Image } from 'astro:assets';
+import lang_ES from '../images/lang-img/lang_ES.png';
+import lang_CAT from '../images/lang-img/lang_CAT.png';
+import lang_EN from '../images/lang-img/lang_EN.png';
+import header_IDEL from '../images/headers-img/IDEL-header-img.png';
+---
+<Layout title="IDEL">
+<!-- Page content -->
+<div class="container mt-5">
+<h1>ESTUDIO SOBRE EXCLUSION SOCIAL</h1>
+
+<h3>Experiencias escolares y valoración de imágenes de exclusión social</h3>
+<div class="mt-5 mb-5">
+    <p>
+        El grupo de investigación en Desarrollo, Educación y Lenguaje I+DEL de la Universitat 
+        de les Illes Balears (http://idel.uib.es/), 
+        estamos llevando a cabo una investigación acerca de variables relacionadas con diferentes situaciones y 
+        experiencias durante tu etapa escolar. Este estudio consta de dos partes. 
+        La primera parte está formada por un apartado de datos sociodemográficos y 3 
+        cuestionarios (acoso escolar retrospectivo, estado de ánimo actual y 
+        estrategias de afrontamiento o regulación emocional). La segunda parte es una 
+        tarea sobre imágenes de exclusión social, en la que deberás valorar tres aspectos 
+        sobre una serie de imágenes. Para cada parte te explicaremos con detalle cada una 
+        de las tareas que llevarás a cabo. Para hacer la segunda tarea deberás hacer 'clic' 
+        sobre un enlace que te proporcionaremos al final de los cuestionarios.
+        <br>
+        El  estudio se puede completar en unos <b>25 minutos</b>, las respuestas son anónimas y 
+        únicamente serán utilizadas con fines de investigación.
+        <br>
+        Si necesitas más información, puedes escribirnos a la dirección idel@uib.es o puedes también contactar con el responsable del estudio: Dr. Daniel Adrover Roig, al tlf 971 17 24 26.
+        <br>
+        Si aceptas participar, por favor, pulsa en "siguiente" para empezar a responder el cuestionario.
+        Para poder participar y contestar al cuestionario debes ser mayor de 18 años.
+        Por favor, intenta ser lo más sincero/a posible y contestar a todas las preguntas. Gracias por tu colaboración. 
+    </p>
+    <form>
+        <button type="submit" class="btn btn-primary btn-block">Siguiente</button>
+    </form>
+</div>
+</div>
+</Layout>

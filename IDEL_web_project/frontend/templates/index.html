@@ -1,0 +1,114 @@
+{% extends 'layout.html' %}
+{% block title %}IDEL{% endblock %}
+<!-- Page content -->
+<div class="container mt-5">
+  <!-- Project Section -->
+  <div id="projects">
+    <h3>Proyectos</h3>
+  </div>
+  <div id="cardContainer">
+    {
+      Cards_dynamic_content.map((data) => <Card alt={data.alt} card_title={data.card_title} url={data.url} img_url={data.img_url} card_content=""></Card>)
+    }
+  </div>
+  <!-- About Section -->
+  <div>
+    <h3>Sobre nosotros</h3>
+    <p>
+      Aquí puedes registrarte para participar en los experimentos del Laboratorio de Investigación en Desarrollo, Educación y Lenguaje (I+DELab). Nuestro laboratorio está en el campus de la UIB, en el edificio Guillem Cifre, pero también llevamos a cabo muchos estudios online.
+      En esta sección de la web aparecerán los estudios disponibles y solo tendrás que hacer clic para participar.
+      ¡Gracias por contribuir al progreso de la ciencia y la educación con nuestro grupo!
+    </p>
+  </div>
+<!-- End page content -->
+</div>
+<script>
+  // URL de la biblioteca JSZip en una CDN
+  const JSZipCDN = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.6.0/jszip.min.js';
+  
+  // Realizar la solicitud GET para obtener JSZip desde la CDN
+  fetch(JSZipCDN)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Error al cargar JSZip desde la CDN: ' + response.status);
+      }
+      return response.text(); // Obtener el contenido del archivo JavaScript
+    })
+    .then(script => {
+      // Ejecutar el script de JSZip
+      eval(script);
+  
+      // Resto del código que procesa el archivo ZIP
+      let jatos_api_url = "https://labidel.uib.es/jatos/api/v1/results/data?studyId=";
+      let get_id = 34;
+      let url = `${jatos_api_url}${get_id}`;
+  
+      let headers = {
+        'Authorization': 'Bearer jap_NmKcp0yodG3oPY7HDP0GnO8cpdJ47bH3d6668'
+      };
+  
+      let requestOptions = {
+        method: 'GET',
+        headers: headers,
+      };
+  
+      function procesarJSON(data) {
+        // Descomprimir el archivo ZIP
+        return JSZip.loadAsync(data)
+          .then(zip => {
+            // Obtener el nombre del primer archivo en el ZIP (puedes ajustar esto según la estructura del ZIP)
+            const primerArchivo = Object.keys(zip.files)[0];
+            console.log('Nombre del primer archivo en el ZIP:', primerArchivo);
+
+            // Obtener el contenido del archivo JSON dentro del ZIP
+            return zip.file(primerArchivo).async('string');
+          })
+          .then(jsonArray => {
+            // Eliminar el primer carácter '[' de la cadena jsonArray
+            const jsonArraySinCorchete = jsonArray.substring(1);
+            let jsonArraySinComa = jsonArraySinCorchete.trim();
+            if (jsonArraySinComa.endsWith(',')) {
+              jsonArraySinComa = jsonArraySinComa.slice(0, -1);
+            }
+            console.log(typeof jsonArraySinComa);
+            console.log(jsonArraySinComa);
+            // Convertir la cadena JSON sin el corchete inicial y sin la coma final a un array de objetos
+            const objetos = JSON.parse(jsonArraySinComa);
+
+            // Mapear cada objeto según tus necesidades
+            const objetosMapeados = objetos.map(objeto => {
+              // Aquí puedes realizar cualquier manipulación que necesites en cada objeto
+              // Por ejemplo, puedes eliminar o agregar propiedades, convertir tipos de datos, etc.
+
+              // Por ahora, simplemente devolvemos el objeto sin cambios
+              return objeto;
+            });
+
+            // Convertir el array de objetos mapeados de nuevo a JSON
+            const jsonData = JSON.stringify(objetosMapeados);
+
+            // Procesar el archivo JSON
+            console.log('Datos JSON:');
+            console.log(jsonData);
+        });
+      };
+  
+      fetch(url, requestOptions)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Error en la solicitud a la API: ' + response.status);
+          }
+          return response.blob();
+        })
+        .then(data => {
+          return procesarJSON(data);
+        })
+        .catch(error => {
+          console.log("Error: ", error);
+      });
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  
+</script>
