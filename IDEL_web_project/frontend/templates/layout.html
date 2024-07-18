@@ -1,119 +1,182 @@
-{% load static %}
+{% load i18n static %}
 <!doctype html>
-<html lang="es">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" 
-			integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" 
-			crossorigin="anonymous">
-		<title>{% block title %}{% endblock %}</title>
-	</head>
-	<body>
-		<!-- Menu -->
-		<div class="container">
-			<div class="row">
-			  <div class="col-11 col-md-11 col-sm-10 justify-content-start">
-				<a href="/"><img src="{% static 'img/headers-img/IDEL-header-img.png' %}" alt="header_IDEL" width="300" height="65"/></a>
-			  </div>
-			  <div class="col-1 col-md-1 col-sm-2 justify-content-center mt-3">
-				<div id="main-nav-bar" class="justify-content-center mr-sm-3">
-					<a href="#es"><img src="{% static 'img/lang-img/lang_ES.png' %}" width="25" height="20" alt="Spanish"></a>
-					<a href="#cat"><img src="{% static 'img/lang-img/lang_CAT.png' %}" width="25" height="20" alt="Catalan"></a>
-					<a href="#en"><img src="{% static 'img/lang-img/lang_EN.png' %}" width="25" height="20" alt="English"></a>
-				</div>
-			  </div>
-			</div>
-		</div>
-		{% block content %}{% endblock %}
-		<!-- Footer -->
-		<footer class="container-fluid bg-light">
-			<!-- Contact Section -->
-			<div class="container">
-				<div id="contact" class="mx-auto">
-					<h3 class="text-center mb-4">Contacto</h3>
-					<p class="text-center">Ponte en contacto con nosotros sobre cualquier problema o duda.</p>
-					<form id="contact-form" class="needs-validation" novalidate>
-						<div class="mb-3">
-							<input type="email" class="form-control" placeholder="Email" required name="from_name">
-							<div class="invalid-feedback">Por favor ingresa un email válido.</div>
-						</div>
-						<div class="mb-3">
-							<textarea class="form-control" placeholder="Comentario" rows="5" required name="message"></textarea>
-							<div class="invalid-feedback">Por favor ingresa tu comentario.</div>
-						</div>
-						<button type="submit" class="btn btn-primary btn-block mb-5">Enviar</button>
-					</form>
-				</div>
-				<div class="d-flex flex-column justify-content-center">
-					<h3 class="text-center mb-4">Agradecimientos</h3>
-					<div class="text-center mb-4">
-						<p>Banners y promos placeholder</p>
-					</div>
-				</div>
-			</div>
-		</footer>
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
-		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-		<script type="text/javascript">
-			document.addEventListener('DOMContentLoaded', function() {
-				emailjs.init("Nf7slTmEwNvUSqS2F"); // Reemplaza con tu Public Key de EmailJS
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="description" content="Astro description"/>
+    <meta name="viewport" content="width=device-width"/>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+    <meta name="generator" content={Astro.generator}/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+          crossorigin="anonymous">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+<!-- Menu -->
+<div class="container">
+    <div class="row">
+        <div class="col-11 col-md-11 col-sm-10 justify-content-start">
+            <a href="/"><img src="{% static 'img/headers-img/IDEL-header-img.png' %}" alt="header_IDEL" width="300"
+                             height="65"/></a>
+        </div>
+        <div class="col-1 col-md-1 col-sm-2 justify-content-center mt-3">
+            <div id="main-nav-bar" class="justify-content-center mr-sm-3">
+                <a href="#es"><img src="{% static 'img/lang-img/lang_ES.png' %}" width="25" height="20"
+                                   alt="Spanish"></a>
+                <a href="#cat"><img src="{% static 'img/lang-img/lang_CAT.png' %}" width="25" height="20" alt="Catalan"></a>
+                <a href="#en"><img src="{% static 'img/lang-img/lang_EN.png' %}" width="25" height="20"
+                                   alt="English"></a>
+            </div>
+        </div>
+    </div>
+</div>
+{% block content %}{% endblock %}´ñp
+<!-- Footer -->
+<footer class="container-fluid bg-light">
+    <!-- Contact Section -->
+    <div class="container">
+        <div id="contact" class="mx-auto">
+            <h3 class="text-center mb-4">Contacto</h3>
+            <p class="text-center">Ponte en contacto con nosotros sobre cualquier problema o duda.</p>
+            <form id="contact-form" class="needs-validation" novalidate>
+                <div class="mb-3">
+                    <input type="email" class="form-control" placeholder="Email" required name="from_name">
+                    <div class="invalid-feedback">Por favor ingresa un email válido.</div>
+                </div>
+                <div class="mb-3">
+                    <textarea class="form-control" placeholder="Comentario" rows="5" required name="message"></textarea>
+                    <div class="invalid-feedback">Por favor ingresa tu comentario.</div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block mb-5">Enviar</button>
+            </form>
+        </div>
+        <div class="d-flex flex-column justify-content-center">
+            <h3 class="text-center mb-4">Redes Sociales, Agradecimientos y Políticas</h3>
+            {% if get_first_banner_queryset %}
+            <div class="text-center mb-4">
+                <div class="col-12">
+                    {% if get_first_banner_queryset.facebook %}
+                    <a href="{{ get_first_banner_queryset.facebook }}">
+                        <img src="{% static 'img/social_media/Facebook.png' %}"
+                             alt="facebook_img" width="30" height="30"/>
+                    </a>
+                    {% endif %}
+                    {% if get_first_banner_queryset.instagram %}
+                    <a href="{{ get_first_banner_queryset.instagram }}">
+                        <img src="{% static 'img/social_media/Instagram.png' %}"
+                             alt="instagram_img" width="30" height="30"/>
+                    </a>
+                    {% endif %}
+                    {% if get_first_banner_queryset.threads %}
+                    <a href="{{ get_first_banner_queryset.threads }}">
+                        <img src="{% static 'img/social_media/Threads.png' %}"
+                             alt="threads_img" width="30" height="30"/>
+                    </a>
+                    {% endif %}
+                    {% if get_first_banner_queryset.youtube %}
+                    <a href="{{ get_first_banner_queryset.youtube }}">
+                        <img src="{% static 'img/social_media/youtube_logo.png' %}"
+                             alt="youtube_img" width="30" height="30"/>
+                    </a>
+                    {% endif %}
+                    {% if get_first_banner_queryset.x_twitter %}
+                    <a href="{{ get_first_banner_queryset.x_twitter }}">
+                        <img src="{% static 'img/social_media/x_logo.png' %}"
+                             alt="x_img" width="30" height="30"/>
+                    </a>
+                    {% endif %}
+                </div>
+                <div class="col-12">
+                    <img src="{{ get_first_banner_queryset.banner_img.url }}" alt="banner img"/>
+                </div>
+                <div class="col-12">
+                    <a class="col-6" href="{{ get_first_banner_queryset.privacy_url }}">
+                        <p class="policy">Politicas de privacidad</p>
+                    </a>
+                    <a class="col-6" href="{{ get_first_banner_queryset.cookies_policy }}">
+                        <p class="policy">Politicas de cookies</p>
+                    </a>
+                </div>
+            </div>
+            {% else %}
+            <div class="text-center mb-4">
+                <p>No se ha configurado un footer</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+        crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser00000000000000000000000@4/dist/email.min.js"></script>
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function() {
+        emailjs.init("Nf7slTmEwNvUSqS2F"); // Reemplaza con tu Public Key de EmailJS
 
-				document.getElementById('contact-form').addEventListener('submit', function(event) {
-					event.preventDefault();
+        document.getElementById('contact-form').addEventListener('submit', function(event) {
+            event.preventDefault();
 
-					emailjs.sendForm('service_bwh4rgd', 'template_4i439oa', this)
-						.then(function(response) {
-							alert('¡El mensaje se ha enviado correctamente!');
-						}, function(error) {
-							alert('Hubo un problema al enviar el mensaje. Por favor, inténtelo de nuevo.');
-						});
-				});
-			});
-		</script>
-	</body>
+            emailjs.sendForm('service_bwh4rgd', 'template_4i439oa', this)
+                .then(function(response) {
+                    alert('¡El mensaje se ha enviado correctamente!');
+                }, function(error) {
+                    alert('Hubo un problema al enviar el mensaje. Por favor, inténtelo de nuevo.');
+                });
+        });
+    });
+</script>
+</body>
 </html>
 <style is:global>
-	:root {
-		--accent: 136, 58, 234;
-		--accent-light: 224, 204, 250;
-		--accent-dark: 49, 10, 101;
-		--accent-gradient: linear-gradient(
-			45deg,
-			rgb(var(--accent)),
-			rgb(var(--accent-light)) 30%,
-			white 60%
-		);
-	}
-	html, body {
+    :root {
+        --accent: 136, 58, 234;
+        --accent-light: 224, 204, 250;
+        --accent-dark: 49, 10, 101;
+        --accent-gradient: linear-gradient(
+            45deg,
+            rgb(var(--accent)),
+            rgb(var(--accent-light)) 30%,
+            white 60%
+        );
+    }
+    html, body {
       height: 100%;
     }
-	html {
-		font-family: system-ui, sans-serif;
-		background-size: 224px;
-	}
-	code {
-		font-family:
-			Menlo,
-			Monaco,
-			Lucida Console,
-			Liberation Mono,
-			DejaVu Sans Mono,
-			Bitstream Vera Sans Mono,
-			Courier New,
-			monospace;
-	}
-	h3 {
-		color: #e22658;
-	}
-	
-	.footer {
-		left: 0;
-		bottom: 0;
-		width: 100%;
-		text-align: center;
-	}
+    html {
+        font-family: system-ui, sans-serif;
+        background-size: 224px;
+    }
+    code {
+        font-family:
+            Menlo,
+            Monaco,
+            Lucida Console,
+            Liberation Mono,
+            DejaVu Sans Mono,
+            Bitstream Vera Sans Mono,
+            Courier New,
+            monospace;
+    }
+    h3 {
+        color: #e22658;
+    }
+
+    a {
+        text-decoration: none;
+        color: black;
+    }
+
+    .policy {
+        color: #e22658;
+        text-decoration: underline;
+    }
+
+    .footer {
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+    }
 </style>

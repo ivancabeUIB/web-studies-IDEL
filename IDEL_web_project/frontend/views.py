@@ -1,5 +1,5 @@
 from django.views.generic.base import TemplateView
-from .models import Project
+from .models import Project, Task, FooterBanner
 
 
 class IndexView(TemplateView):
@@ -8,20 +8,7 @@ class IndexView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['projects'] = Project.objects.filter(is_active=True)
-
-        return context
-
-
-class StatisticView(TemplateView):
-    template_name = "statistic.html"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-
-        context['statistics'] = [
-            {'title': 'Card 1', 'description': 'Description for card 1'},
-            {'title': 'Card 2', 'description': 'Description for card 2'},
-            {'title': 'Card 3', 'description': 'Description for card 3'},
-        ]
+        context['recommended_projects'] = Project.objects.filter(is_active=True, is_recommended=True)
+        context['get_first_banner_queryset'] = FooterBanner.objects.all()[0]
 
         return context
