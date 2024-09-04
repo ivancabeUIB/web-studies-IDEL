@@ -14,7 +14,7 @@
 </head>
 <body>
 <!-- Menu -->
-<div class="container">
+<div id="fixed-container" class="container-fluid col-12">
     <div class="row">
         <div class="col-11 col-md-11 col-sm-10 justify-content-start">
             <a href="/"><img src="{% static 'img/headers-img/IDEL-header-img.png' %}" alt="header_IDEL" width="300"
@@ -31,7 +31,7 @@
         </div>
     </div>
 </div>
-{% block content %}{% endblock %}´ñp
+{% block content %}{% endblock %}
 <!-- Footer -->
 <footer class="container-fluid bg-light">
     <!-- Contact Section -->
@@ -178,5 +178,13 @@
         bottom: 0;
         width: 100%;
         text-align: center;
+    }
+
+    #fixed-container {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+        background-color: white;
     }
 </style>
