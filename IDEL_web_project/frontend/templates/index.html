@@ -5,7 +5,7 @@
 <!-- Page content -->
 <div id="main_content" class="container mt-5">
     <!-- Project Section -->
-    {% if projects %}
+    {% if recommended_projects %}
     <div id="recommended_projects">
         <h3>Recomendados</h3>
     </div>
@@ -83,6 +83,33 @@
                     <div class="text-center">
                         <img src="/" alt="/" class="img-fluid"
                              style="max-width: 100%; width: 1000px; height: 460px;"/>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% if investStudies %}
+    <div id="investStudies">
+      <h3>Investigaciones</h3>
+    </div>
+    <div id="scale_cardContainer">
+        {% for invest in investStudies %}
+        <div class="card border p-3 mt-2 mb-2" style="background-color: #f2f2f2;">
+            <a href="{{ scale.url_to_jatos }}">
+                <div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <p class="mb-0"><b>{{ scale.name }}</b></p>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="text-center">
+                        <img src="/" alt="/" class="img-fluid"
+                            style="max-width: 100%; width: 1000px; height: 460px;"/>
                     </div>
                 </div>
             </a>
