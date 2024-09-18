@@ -36,6 +36,15 @@ class Scale(models.Model):
     def __str__(self):
         return self.name
 
+class InvestStudies(models.Model):
+    name = models.CharField(max_length=150)
+    description = models.TextField()
+    photo = models.ImageField(upload_to='cards-img/')
+    is_active = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.name
+
 
 class FooterBanner(models.Model):
     facebook = models.URLField(max_length=200, default='', blank=True)
