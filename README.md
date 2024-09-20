@@ -9,48 +9,40 @@
 
 # Descripción 📋
 
-_Descripción del proyecto. Tengo que pedirlo._
-
-
+_Este proyecto busca promover la transición digital mediante el desarrollo de una plataforma en línea para obtener datos, analizarlos estadísticamente de forma pseudo-automatizada y generar conclusiones para avanzar en el conocimiento científico de campos como la educación y psicología del desarrollo._
 
 # Comenzando 🚀
 
 _Estas instrucciones te permitirán obtener una copia del proyecto en funcionamiento en tu almacenamiento local para propósitos de desarrollo y pruebas._
 
 
-
-
 ### Requisitos previos 📋
 
-_Antes de empezar, asegurate de tener intaladas las herramientas necesarias:_
+_Antes de empezar, asegúrate de tener instaladas las herramientas necesarias:_
 
-* Lo primero que se necesita es implementar el paquete Python 3.10 o una versión posterior. Para más información visita [Python 3.10](https://docs.python.org/es/3.10/using/windows.html).
-* Se debe instalar el programa [Git](https://git-scm.com/downloads).
-* Se necesita un IDE como [PyCharm Comunity Edition]() o VSCode. 
-_
+* Lo primero que se necesita es instalar el paquete [Python 3.10](https://docs.python.org/es/3.10/using/windows.html) o una versión posterior.
+* Se debe instalar el programa [Git 2.46.0](https://git-scm.com/downloads) o una versión posterior.
+* Se necesita un IDE como [PyCharm Community Edition 2024.2.1](https://www.jetbrains.com/es-es/pycharm/download/?section=windows) o [VSCode 1.93](https://code.visualstudio.com/download), o versiones posteriores. 
+* Una vez instalado el IDE y el paquete Python, son necesarios los paquetes [pip](https://pip.pypa.io/en/stable/installation/) y [venv](https://docs.python.org/3/library/venv.html), que normalmente incluidos en las instalaciones anteriores. Para evitar posibles errores, es conveniente verificar si se tiene instalado los paquetes.
+* Se deben instalar los paquetes Django y Pillow a partir de la terminal del IDE.
 ```
-
-INSTALAR PYCHARM Y GIT BASH ?
-AÑADIR AQUI COMANDOS pipinstall Django, pipinstall pillow
-
+pip install django
+pip install pillow
 ```
 
 ### Instalación 🔧
 
 _A continuación se describen paso a paso las instrucciones que se deben ejecutar para obtener un entorno de desarrollo._
 
-_Primero tal_
+_Primero se debe clonar repositorio, para ello debemos entrar en la carpeta donde se quiera clonar el proyecto, click derecho y seleccionamos Git Bash e introducimos:_
+
 ```
+git init
 git clone https://github.com/ivancabeUIB/web-studies-IDEL
-```
-
-_Seguidamente tal_
 
 ```
-hasta finalizar
-```
 
-_Finaliza con un ejemplo de cómo obtener datos del sistema o como usarlos para una pequeña demo._
+
 
 ## Ejecución de pruebas ⚙️
 
@@ -103,5 +95,7 @@ _Se menciona a todos aquellos que ayudaron a levantar el proyecto desde sus inic
 * **Ivan Cabellos Berber** - *Multitask* - [ivancabeUIB_GitHub](https://github.com/ivancabeUIB)
 * **Víctor** - *Multitask* - [Víctor](https://#fulanito-de-tal)
 * **Alejandro Segura Alfaro** - *READMEcreator* - [alexsegur_GitHub](https://github.com/alexsegur)
-
+* **Raúl
+* **Dani
+* **Eva
 _También puedes mirar la lista de todos los [contribuyentes](https://github.com/your/project/contributors) quíenes han participado en este proyecto._ 
