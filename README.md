@@ -14,6 +14,12 @@
 
 _Este proyecto busca promover la transición digital mediante el desarrollo de una plataforma en línea para obtener datos, analizarlos estadísticamente de forma automatizada y generar conclusiones para avanzar en el conocimiento científico de campos como la educación y psicología del desarrollo._
 
+_El objetivo es desarrollar herramientas online para la experimentación que funcione en los principales navegadores y sistemas operativos. Es decir, poder abastecer de un conjunto de tests online más allá del convencional papel y boli. De esta forma, se puede llegar a grupos más grandes y variados y, por tanto, se facilita la tarea de encontrar una minoría o grupo objetivo específico al cual se dirige un experimento concreto. También se eliminarían los problemas de limitación geográfica, de tiempo o físicas._ 
+
+_El hecho de poder almacenar grandes cantidades de datos de esta forma responde a la necesidad de profesionales del campo para comparar diferentes parámetros de un individuo testeado con los índices medios de una población con las mismas características demográficas y sociales. La recolección de dato a través de este proyecto permitirá tener una base de datos sólida y de libre acceso._
+
+_En este proyecto también se tiene el objetivo de implementar un análisis estadístico a esas bases de datos mencionadas anteriormente con la idea de extraer conclusiones firmes y con fundamento para una futura discusión académica entre profesionales del campo de la investigación._
+
 ## Comenzando 🚀
 
 _Estas instrucciones permitirán obtener una copia del proyecto en funcionamiento en el almacenamiento local para propósitos de desarrollo y pruebas._
