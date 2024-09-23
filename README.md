@@ -68,7 +68,7 @@ _Estas son las herramientas que se utilizaron para crear este proyecto_
 
 ## Wiki 📖
 
-TO DO
+TODO
 
 Puedes encontrar mucho más de cómo utilizar este proyecto en nuestra [Wiki](https://github.com/tu/proyecto/wiki)
 
