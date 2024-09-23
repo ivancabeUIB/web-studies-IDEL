@@ -5,10 +5,10 @@
 2. [Comenzando](#Comenzando-)
    1. [Requisitos previos](#requisitos-previos-)
    2. [Instalación](#instalación-)
-4. [Despliegue](#despliegue-)
-5. [Construido con](#construido-con-)
-6. [Wiki](#wiki-)
-7. [Autores](#autores-)
+3. [Despliegue](#despliegue-)
+4. [Construido con](#construido-con-)
+5. [Wiki](#wiki-)
+6. [Autores](#autores-)
 
 ## Descripción 📋
 
@@ -76,7 +76,7 @@ _Estas son las herramientas que se utilizaron para crear este proyecto_
 
 TODO
 
-Puedes encontrar mucho más de cómo utilizar este proyecto en nuestra [Wiki](https://github.com/tu/proyecto/wiki)
+Puedes encontrar mucho más de cómo utilizar este proyecto en nuestra [Wiki](https://github.com/ivancabeUIB/web-studies-IDEL/wiki)
 
 ## Versionado 📌
 
@@ -88,8 +88,8 @@ _Se menciona a todos aquellos que ayudaron a levantar el proyecto desde sus inic
 
 * **Ivan Cabellos Berber** - *Developer* - [ivancabeUIB_GitHub](https://github.com/ivancabeUIB)
 * **Alejandro Segura Alfaro** - *Developer* - [alexsegur_GitHub](https://github.com/alexsegur)
-* **Víctor Alejandro Sánchez Azanza** - * * - [Víctor - Personal UIB](https://#fulanito-de-tal)
-* **Raül López Penadés** - * * - [Raül - Personal UIB](https://www.uib.es/es/personal/ABjMwMjc4NA/)
+* **Víctor Alejandro Sánchez Azanza** - *Colaborador* - [Víctor - Personal UIB](https://#fulanito-de-tal)
+* **Raül López Penadés** - *Colaborador* - [Raül - Personal UIB](https://www.uib.es/es/personal/ABjMwMjc4NA/)
 * **Daniel Adrover Roig** - *Subdirector* - [Daniel - Personal UIB](https://www.uib.es/es/personal/ABjE5MzQzNg/)
 * **Eva Aguilar Mediavilla** - *Directora* - [Eva - Personal UIB](https://www.uib.es/es/personal/ABTE1MjY1/)
 
