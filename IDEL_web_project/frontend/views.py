@@ -12,6 +12,6 @@ class IndexView(TemplateView):
         context['scales'] = Scale.objects.filter(is_active=True)
         context['investStudies'] = InvestStudies.objects.filter(is_active=True)
         context['recommended_projects'] = Project.objects.filter(is_active=True, is_recommended=True)
-        context['get_first_banner_queryset'] = FooterBanner.objects.all()[0]
+        context['get_first_banner_queryset'] = FooterBanner.objects.all().first()
 
         return context
