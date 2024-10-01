@@ -7,7 +7,7 @@
     <!-- Project Section -->
     {% if recommended_projects %}
     <div id="recommended_projects">
-        <h3>Recomendados</h3>
+        <h3>{% trans 'Recomendados' %}</h3>
     </div>
     <div id="recommended_cardContainer">
         {% for project in recommended_projects %}
@@ -36,7 +36,7 @@
     {% endif %}
     {% if projects %}
     <div id="projects">
-        <h3>Proyectos</h3>
+        <h3>{% trans 'Proyectos' %}</h3>
     </div>
     <div id="projects_cardContainer">
         {% for project in projects %}
@@ -65,7 +65,7 @@
     {% endif %}
     {% if scales %}
     <div id="scale">
-        <h3>Baremos</h3>
+        <h3>{% trans 'Baremos' %}</h3>
     </div>
     <div id="scale_cardContainer">
         {% for scale in scales %}
@@ -92,9 +92,9 @@
     {% endif %}
     {% if investStudies %}
     <div id="investStudies">
-      <h3>Investigaciones</h3>
+      <h3>{% trans 'Investigaciones' %}</h3>
     </div>
-    <div id="scale_cardContainer">
+    <div id="invest_cardContainer">
         {% for invest in investStudies %}
         <div class="card border p-3 mt-2 mb-2" style="background-color: #f2f2f2;">
             <a href="{{ scale.url_to_jatos }}">
@@ -119,13 +119,11 @@
     {% endif %}
     <!-- About Section -->
     <div>
-        <h3>Sobre nosotros</h3>
+        <h3>{% trans 'Sobre nosotros' %}</h3>
         <p>
-            Aquí puedes registrarte para participar en los experimentos del Laboratorio de Investigación en Desarrollo,
-            Educación y Lenguaje (I+DELab). Nuestro laboratorio está en el campus de la UIB, en el edificio Guillem
-            Cifre, pero también llevamos a cabo muchos estudios online.
-            En esta sección de la web aparecerán los estudios disponibles y solo tendrás que hacer clic para participar.
-            ¡Gracias por contribuir al progreso de la ciencia y la educación con nuestro grupo!
+            {% blocktrans %}
+            Aquí puedes registrarte para participar en los experimentos del Laboratorio de Investigación en Desarrollo, Educación y Lenguaje (I+DELab). Nuestro laboratorio está en el campus de la UIB, en el edificio Guillem Cifre, pero también llevamos a cabo muchos estudios online. En esta sección de la web aparecerán los estudios disponibles y solo tendrás que hacer clic para participar. ¡Gracias por contribuir al progreso de la ciencia y la educación con nuestro grupo!
+            {% endblocktrans %}
         </p>
     </div>
     <!-- End page content -->
@@ -219,4 +217,9 @@
         console.error('Error:', error);
       });
 </script>
+<style>
+    #recommended_projects {
+        margin-top: 80px;
+    }
+</style>
 {% endblock %}
