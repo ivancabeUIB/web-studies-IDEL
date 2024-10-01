@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-26 11:47+0200\n"
+"POT-Creation-Date: 2024-10-01 11:13+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -63,21 +63,25 @@ msgstr "Sobre nosotros"
 
 #: .\frontend\templates\index.html:124
 msgid ""
-"Aquí puedes registrarte para participar en los experimentos del Laboratorio "
-"de Investigación en Desarrollo, Educación y Lenguaje (I+DELab). Nuestro "
-"laboratorio está en el campus de la UIB, en el edificio Guillem Cifre, pero "
-"también llevamos a cabo muchos estudios online. En esta sección de la web "
-"aparecerán los estudios disponibles y solo tendrás que hacer clic para "
-"participar. ¡Gracias por contribuir al progreso de la ciencia y la educación "
-"con nuestro grupo!"
+"\n"
+"            Aquí puedes registrarte para participar en los experimentos del "
+"Laboratorio de Investigación en Desarrollo, Educación y Lenguaje (I+DELab). "
+"Nuestro laboratorio está en el campus de la UIB, en el edificio Guillem "
+"Cifre, pero también llevamos a cabo muchos estudios online. En esta sección "
+"de la web aparecerán los estudios disponibles y solo tendrás que hacer clic "
+"para participar. ¡Gracias por contribuir al progreso de la ciencia y la "
+"educación con nuestro grupo!\n"
+"            "
 msgstr ""
-"Aquí puedes registrarte para participar en los experimentos del Laboratorio "
-"de Investigación en Desarrollo, Educación y Lenguaje (I+DELab). Nuestro "
-"laboratorio está en el campus de la UIB, en el edificio Guillem Cifre, pero "
-"también llevamos a cabo muchos estudios online. En esta sección de la web "
-"aparecerán los estudios disponibles y solo tendrás que hacer clic para "
-"participar. ¡Gracias por contribuir al progreso de la ciencia y la educación "
-"con nuestro grupo!"
+"\n"
+"            Aquí puedes registrarte para participar en los experimentos del "
+"Laboratorio de Investigación en Desarrollo, Educación y Lenguaje (I+DELab). "
+"Nuestro laboratorio está en el campus de la UIB, en el edificio Guillem "
+"Cifre, pero también llevamos a cabo muchos estudios online. En esta sección "
+"de la web aparecerán los estudios disponibles y solo tendrás que hacer clic "
+"para participar. ¡Gracias por contribuir al progreso de la ciencia y la "
+"educación con nuestro grupo!\n"
+"            "
 
 #: .\frontend\templates\layout.html:55
 msgid "Contacto"
@@ -103,14 +107,14 @@ msgstr "Enviar"
 msgid "Redes Sociales, Agradecimientos y Políticas"
 msgstr "Redes Sociales, Agradecimientos y Políticas"
 
-#: .\frontend\templates\layout.html:110
+#: .\frontend\templates\layout.html:112
 msgid "Politicas de privacidad"
 msgstr "Politicas de privacidad"
 
-#: .\frontend\templates\layout.html:113
+#: .\frontend\templates\layout.html:115
 msgid "Politicas de cookies"
 msgstr "Politicas de cookies"
 
-#: .\frontend\templates\layout.html:119
+#: .\frontend\templates\layout.html:121
 msgid "No se ha configurado un footer"
 msgstr "No se ha configurado un footer"

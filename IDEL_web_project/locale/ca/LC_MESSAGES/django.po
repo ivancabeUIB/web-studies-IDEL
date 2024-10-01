@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-26 11:47+0200\n"
+"POT-Creation-Date: 2024-10-01 11:12+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -62,21 +62,25 @@ msgstr "Sobre nosaltres"
 
 #: .\frontend\templates\index.html:124
 msgid ""
-"Aquí puedes registrarte para participar en los experimentos del Laboratorio "
-"de Investigación en Desarrollo, Educación y Lenguaje (I+DELab). Nuestro "
-"laboratorio está en el campus de la UIB, en el edificio Guillem Cifre, pero "
-"también llevamos a cabo muchos estudios online. En esta sección de la web "
-"aparecerán los estudios disponibles y solo tendrás que hacer clic para "
-"participar. ¡Gracias por contribuir al progreso de la ciencia y la educación "
-"con nuestro grupo!"
+"\n"
+"            Aquí puedes registrarte para participar en los experimentos del "
+"Laboratorio de Investigación en Desarrollo, Educación y Lenguaje (I+DELab). "
+"Nuestro laboratorio está en el campus de la UIB, en el edificio Guillem "
+"Cifre, pero también llevamos a cabo muchos estudios online. En esta sección "
+"de la web aparecerán los estudios disponibles y solo tendrás que hacer clic "
+"para participar. ¡Gracias por contribuir al progreso de la ciencia y la "
+"educación con nuestro grupo!\n"
+"            "
 msgstr ""
-"Aquí pots registrar-te per participar en els experiments del Laboratori"
-"d'Investigació en Desenvolupament, Educació i Llenguatge (I+DELab). El nostre "
-"laboratori és al campus de la UIB, a l'edifici Guillem Cifre, però "
-"també duem a terme molts estudis online. En aquesta secció de la web "
-"apareixeran els estudis disponibles i només hauràs de fer clic per a "
-"participar. Gràcies per contribuir al progrés de la ciència i l'educació"
-"amb el nostre grup!"
+"\n"
+"            Aquí et pots registrar per participar en els experiments del "
+"Laboratori de Recerca en Desenvolupament, Educació i Llenguatge (I+DELab). "
+"El nostre laboratori està al campus de la UIB, a l'edifici Guillem Cifre, "
+"però també fem molts estudis en línia. En aquesta secció de la web "
+"apareixeran els estudis disponibles i només hauràs de fer clic per "
+"participar. Gràcies per contribuir al progrés de la ciència i l'educació "
+"amb el nostre grup!\n"
+"            "
 
 #: .\frontend\templates\layout.html:55
 msgid "Contacto"
@@ -102,14 +106,14 @@ msgstr "Enviar"
 msgid "Redes Sociales, Agradecimientos y Políticas"
 msgstr "Xarxes socials, Agradeïments i Polítiques"
 
-#: .\frontend\templates\layout.html:110
+#: .\frontend\templates\layout.html:112
 msgid "Politicas de privacidad"
 msgstr "Polítiques de privacitat"
 
-#: .\frontend\templates\layout.html:113
+#: .\frontend\templates\layout.html:115
 msgid "Politicas de cookies"
 msgstr "Polítiques de cookies"
 
-#: .\frontend\templates\layout.html:119
+#: .\frontend\templates\layout.html:121
 msgid "No se ha configurado un footer"
 msgstr "No s'ha configurat un footer"
