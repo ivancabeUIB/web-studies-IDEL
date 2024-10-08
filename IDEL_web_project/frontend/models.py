@@ -22,7 +22,7 @@ class Task(TranslatableModel):
         name=models.CharField(max_length=150, verbose_name=_('Name')),
         description=models.TextField(verbose_name=_('Description')),
     )
-    photo = models.ImageField(upload_to='cards-img/')
+    photo = models.ImageField(upload_to='cards-img/', null=True, blank=True)
     url_to_jatos = models.URLField(max_length=200, default='')
     is_active = models.BooleanField(default=False)
     is_recommended = models.BooleanField(default=False)
@@ -36,7 +36,7 @@ class Scale(TranslatableModel):
         name=models.CharField(max_length=150, verbose_name=_('Name')),
         description=models.TextField(verbose_name=_('Description')),
     )
-    photo = models.ImageField(upload_to='cards-img/')
+    photo = models.ImageField(upload_to='cards-img/', null=True, blank=True)
     url_to_jatos = models.URLField(max_length=200, default='')
     is_active = models.BooleanField(default=False)
     is_recommended = models.BooleanField(default=False)
@@ -50,8 +50,9 @@ class InvestStudies(TranslatableModel):
         name=models.CharField(max_length=150, verbose_name=_('Name')),
         description=models.TextField(verbose_name=_('Description')),
     )
-    photo = models.ImageField(upload_to='cards-img/')
+    photo = models.ImageField(upload_to='cards-img/', null=True, blank=True)
     is_active = models.BooleanField(default=False)
+    is_recommended = models.BooleanField(default=False)
 
     def __str__(self):
         return self.safe_translation_getter('name', any_language=True)
