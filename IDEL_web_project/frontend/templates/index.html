@@ -5,26 +5,26 @@
 <!-- Page content -->
 <div id="main_content" class="container mt-5">
     <!-- Project Section -->
-    {% if recommended_projects %}
+    {% if recommended_items %}
     <div id="recommended_projects">
         <h3>{% trans 'Recomendados' %}</h3>
     </div>
     <div id="recommended_cardContainer">
-        {% for project in recommended_projects %}
+        {% for recommended in recommended_items %}
         <div class="card border p-3 mt-2 mb-2" style="background-color: #f2f2f2;">
             <a href="{{ project.url_to_jatos }}">
                 <div>
                     <div class="container">
                         <div class="row">
                             <div class="col-12 text-center">
-                                <p class="mb-0"><b>{{ project.name }}</b></p>
+                                <p class="mb-0"><b>{{ recommended.name }}</b></p>
                             </div>
                         </div>
                     </div>
-                    {% if project.photo %}
+                    {% if recommended.photo %}
                     <br>
                     <div class="text-center">
-                        <img src="{{ project.photo.url }}" alt="{{ project.name }}" class="img-fluid"
+                        <img src="{{ recommended.photo.url }}" alt="{{ recommended.name }}" class="img-fluid"
                              style="max-width: 100%; width: 1000px; height: 460px;"/>
                     </div>
                     {% endif %}
@@ -80,10 +80,12 @@
                         </div>
                     </div>
                     <br>
+                    {% if scale.photo %}
                     <div class="text-center">
                         <img src="/" alt="/" class="img-fluid"
                              style="max-width: 100%; width: 1000px; height: 460px;"/>
                     </div>
+                    {% endif %}
                 </div>
             </a>
         </div>
@@ -97,20 +99,24 @@
     <div id="invest_cardContainer">
         {% for invest in investStudies %}
         <div class="card border p-3 mt-2 mb-2" style="background-color: #f2f2f2;">
-            <a href="{{ scale.url_to_jatos }}">
                 <div>
                     <div class="container">
                         <div class="row">
                             <div class="col-12 text-center">
-                                <p class="mb-0"><b>{{ scale.name }}</b></p>
+                                <p class="mb-0"><b>{{ invest.name }}</b></p>
+                            </div>
+                            <div class="col-12 text-center">
+                                <p class="mb-0">{{ invest.description }}</p>
                             </div>
                         </div>
                     </div>
                     <br>
+                    {% if invest.photo %}
                     <div class="text-center">
                         <img src="/" alt="/" class="img-fluid"
                             style="max-width: 100%; width: 1000px; height: 460px;"/>
                     </div>
+                    {% endif %}
                 </div>
             </a>
         </div>
