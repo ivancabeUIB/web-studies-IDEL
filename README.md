@@ -8,7 +8,7 @@
 3. [Despliegue](#despliegue-)
 4. [Construido con](#construido-con-)
 5. [Wiki](#wiki-)
-6. [Autores](#autores-)
+6. [Autores](#autores-) 
 
 ## Descripción 📋
 
