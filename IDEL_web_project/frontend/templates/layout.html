@@ -6,7 +6,6 @@
     <meta name="description" content="Astro description"/>
     <meta name="viewport" content="width=device-width"/>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
-    <meta name="generator" content={Astro.generator}/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
           crossorigin="anonymous">
@@ -22,11 +21,27 @@
         </div>
         <div class="col-1 col-md-1 col-sm-2 justify-content-center mt-3">
             <div id="main-nav-bar" class="justify-content-center mr-sm-3">
-                <a href="#es"><img src="{% static 'img/lang-img/lang_ES.png' %}" width="25" height="20"
-                                   alt="Spanish"></a>
-                <a href="#cat"><img src="{% static 'img/lang-img/lang_CAT.png' %}" width="25" height="20" alt="Catalan"></a>
-                <a href="#en"><img src="{% static 'img/lang-img/lang_EN.png' %}" width="25" height="20"
-                                   alt="English"></a>
+                <form action="{% url 'set_language' %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ request.path }}">
+                    <button type="submit" name="language" value="es" style="border:none;background:none;">
+                        <img src="{% static 'img/lang-img/lang_ES.png' %}" width="25" height="20" alt="Spanish">
+                    </button>
+                </form>
+                <form action="{% url 'set_language' %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ request.path }}">
+                    <button type="submit" name="language" value="ca" style="border:none;background:none;">
+                        <img src="{% static 'img/lang-img/lang_CAT.png' %}" width="25" height="20" alt="Catalan">
+                    </button>
+                </form>
+                <form action="{% url 'set_language' %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ request.path }}">
+                    <button type="submit" name="language" value="en" style="border:none;background:none;">
+                        <img src="{% static 'img/lang-img/lang_EN.png' %}" width="25" height="20" alt="English">
+                    </button>
+                </form>
             </div>
         </div>
     </div>
@@ -37,22 +52,22 @@
     <!-- Contact Section -->
     <div class="container">
         <div id="contact" class="mx-auto">
-            <h3 class="text-center mb-4">Contacto</h3>
-            <p class="text-center">Ponte en contacto con nosotros sobre cualquier problema o duda.</p>
+            <h3 class="text-center mb-4">{% trans 'Contacto' %}</h3>
+            <p class="text-center">{% trans 'Ponte en contacto con nosotros sobre cualquier problema o duda.' %}</p>
             <form id="contact-form" class="needs-validation" novalidate>
                 <div class="mb-3">
                     <input type="email" class="form-control" placeholder="Email" required name="from_name">
-                    <div class="invalid-feedback">Por favor ingresa un email válido.</div>
+                    <div class="invalid-feedback">{% trans 'Por favor ingresa un email válido.' %}</div>
                 </div>
                 <div class="mb-3">
                     <textarea class="form-control" placeholder="Comentario" rows="5" required name="message"></textarea>
-                    <div class="invalid-feedback">Por favor ingresa tu comentario.</div>
+                    <div class="invalid-feedback">{% trans 'Por favor ingresa tu comentario.' %}</div>
                 </div>
-                <button type="submit" class="btn btn-primary btn-block mb-5">Enviar</button>
+                <button type="submit" class="btn btn-primary btn-block mb-5">{% trans 'Enviar' %}</button>
             </form>
         </div>
         <div class="d-flex flex-column justify-content-center">
-            <h3 class="text-center mb-4">Redes Sociales, Agradecimientos y Políticas</h3>
+            <h3 class="text-center mb-4">{% trans 'Redes Sociales, Agradecimientos y Políticas' %}</h3>
             {% if get_first_banner_queryset %}
             <div class="text-center mb-4">
                 <div class="col-12">
@@ -87,21 +102,23 @@
                     </a>
                     {% endif %}
                 </div>
+                {% if get_first_banner_queryset.banner_img %}
                 <div class="col-12">
                     <img src="{{ get_first_banner_queryset.banner_img.url }}" alt="banner img"/>
                 </div>
+                {% endif %}
                 <div class="col-12">
                     <a class="col-6" href="{{ get_first_banner_queryset.privacy_url }}">
-                        <p class="policy">Politicas de privacidad</p>
+                        <p class="policy">{% trans 'Politicas de privacidad' %}</p>
                     </a>
                     <a class="col-6" href="{{ get_first_banner_queryset.cookies_policy }}">
-                        <p class="policy">Politicas de cookies</p>
+                        <p class="policy">{% trans 'Politicas de cookies' %}</p>
                     </a>
                 </div>
             </div>
             {% else %}
             <div class="text-center mb-4">
-                <p>No se ha configurado un footer</p>
+                <p>{% trans 'No se ha configurado un footer' %}</p>
             </div>
             {% endif %}
         </div>
@@ -113,7 +130,7 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser00000000000000000000000@4/dist/email.min.js"></script>
 <script type="text/javascript">
     document.addEventListener('DOMContentLoaded', function() {
-        emailjs.init("Nf7slTmEwNvUSqS2F"); // Reemplaza con tu Public Key de EmailJS
+        emailjs.init("Nf7slTmEwNvUSqS2F");
 
         document.getElementById('contact-form').addEventListener('submit', function(event) {
             event.preventDefault();
@@ -143,6 +160,7 @@
     }
     html, body {
       height: 100%;
+      padding-top: 20px;
     }
     html {
         font-family: system-ui, sans-serif;
@@ -185,6 +203,6 @@
         top: 0;
         width: 100%;
         z-index: 1000;
-        background-color: white;
+        background-color: WhiteSmoke;
     }
 </style>

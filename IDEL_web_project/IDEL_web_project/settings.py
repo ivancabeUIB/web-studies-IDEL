@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     # Own apps
     'frontend',
     'IDEL_web_project',
+    # Other apps
+    'parler',
 ]
 
 MIDDLEWARE = [
@@ -51,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
 ]
 
 ROOT_URLCONF = 'IDEL_web_project.urls'
@@ -107,11 +110,34 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, 'locale'),
+]
+
+LANGUAGES = [
+    ('ca', _('Catalan')),
+    ('es', _('Spanish')),
+    ('en', _('English')),
+]
+
 LANGUAGE_CODE = 'ca-ES'
+
+PARLER_LANGUAGES = {
+    None: (
+        {'code': 'ca', 'name': 'Catalan'},
+        {'code': 'en', 'name': 'English'},
+        {'code': 'es', 'name': 'Spanish'},
+    ),
+    'default': {
+        'fallback': 'ca',  # Idioma predeterminado
+        'hide_untranslated': False,  # Mostrar entradas aunque no estén traducidas
+    }
+}
 
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
+USE_L10N = True
 
 USE_TZ = True
 
