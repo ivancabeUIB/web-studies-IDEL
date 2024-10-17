@@ -79,11 +79,13 @@
                             </div>
                         </div>
                     </div>
+                    {% if scale.photo %}
                     <br>
                     <div class="text-center">
-                        <img src="/" alt="/" class="img-fluid"
+                        <img src="{{ scale.photo.url }}" alt="/" class="img-fluid"
                              style="max-width: 100%; width: 1000px; height: 460px;"/>
                     </div>
+                    {% endif %}
                 </div>
             </a>
         </div>
@@ -97,20 +99,22 @@
     <div id="invest_cardContainer">
         {% for invest in investStudies %}
         <div class="card border p-3 mt-2 mb-2" style="background-color: #f2f2f2;">
-            <a href="{{ scale.url_to_jatos }}">
+            <a href="{{ invest.url_to_jatos }}">
                 <div>
                     <div class="container">
                         <div class="row">
                             <div class="col-12 text-center">
-                                <p class="mb-0"><b>{{ scale.name }}</b></p>
+                                <p class="mb-0"><b>{{ invest.name }}</b></p>
                             </div>
                         </div>
                     </div>
+                    {% if invest.photo %}
                     <br>
                     <div class="text-center">
-                        <img src="/" alt="/" class="img-fluid"
-                            style="max-width: 100%; width: 1000px; height: 460px;"/>
+                        <img src="{{ invest.photo.url }}" alt="/" class="img-fluid"
+                             style="max-width: 100%; width: 1000px; height: 460px;"/>
                     </div>
+                    {% endif %}
                 </div>
             </a>
         </div>
