@@ -79,10 +79,10 @@
                             </div>
                         </div>
                     </div>
-                    <br>
                     {% if scale.photo %}
+                    <br>
                     <div class="text-center">
-                        <img src="/" alt="/" class="img-fluid"
+                        <img src="{{ scale.photo.url }}" alt="/" class="img-fluid"
                              style="max-width: 100%; width: 1000px; height: 460px;"/>
                     </div>
                     {% endif %}
@@ -105,16 +105,13 @@
                             <div class="col-12 text-center">
                                 <p class="mb-0"><b>{{ invest.name }}</b></p>
                             </div>
-                            <div class="col-12 text-center">
-                                <p class="mb-0">{{ invest.description }}</p>
-                            </div>
                         </div>
                     </div>
-                    <br>
                     {% if invest.photo %}
+                    <br>
                     <div class="text-center">
-                        <img src="/" alt="/" class="img-fluid"
-                            style="max-width: 100%; width: 1000px; height: 460px;"/>
+                        <img src="{{ invest.photo.url }}" alt="/" class="img-fluid"
+                             style="max-width: 100%; width: 1000px; height: 460px;"/>
                     </div>
                     {% endif %}
                 </div>
