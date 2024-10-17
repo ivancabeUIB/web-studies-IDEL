@@ -42,7 +42,7 @@ msgstr "Description"
 
 #: .\frontend\templates\index.html:10
 msgid "Recomendados"
-msgstr ""
+msgstr "Recommended"
 
 #: .\frontend\templates\index.html:39
 msgid "Proyectos"
