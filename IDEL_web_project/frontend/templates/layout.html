@@ -13,32 +13,51 @@
 </head>
 <body>
 <!-- Menu -->
-<div id="fixed-container" class="container-fluid col-12">
-    <div class="row">
-        <div class="col-11 col-md-11 col-sm-10 justify-content-start">
-            <a href="/"><img src="{% static 'img/headers-img/IDEL-header-img.png' %}" alt="header_IDEL" width="300"
-                             height="65"/></a>
+<div class="container-fluid">
+    <div class="row align-items-center py-3">
+        <!-- Imagen del header -->
+        <div class="col-12 col-md-4 text-center text-md-start">
+            <a href="/">
+                <img src="{% static 'img/headers-img/IDEL-header-img.png' %}" alt="header_IDEL"
+                     class="img-fluid img-header">
+            </a>
         </div>
-        <div class="col-1 col-md-1 col-sm-2 justify-content-center mt-3">
-            <div id="main-nav-bar" class="justify-content-center mr-sm-3">
+
+        <!-- Menú de navegación -->
+        <div class="col-12 col-md-6 d-flex justify-content-center justify-content-md-start mt-3 mt-md-0">
+            <nav id="nav-bar">
+                <ul class="nav flex-column flex-md-row">
+                    <li class="nav-item"><a class="nav-link" href="#recommended_projects">{% trans 'Recomendados' %}</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#projects">{% trans 'Proyectos' %}</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#scale">{% trans 'Baremos' %}</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#investStudies">{% trans 'Investigaciones' %}</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#invest_cardContainer">{% trans 'Sobre nosotros' %}</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">{% trans 'Contactanos' %}</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Banderas de idioma -->
+        <div class="col-12 col-md-2 d-flex justify-content-center justify-content-md-end mt-3 mt-md-0">
+            <div id="main-nav-bar" class="d-flex">
                 <form action="{% url 'set_language' %}" method="post" style="display:inline;">
                     {% csrf_token %}
                     <input type="hidden" name="next" value="{{ request.path }}">
-                    <button type="submit" name="language" value="es" style="border:none;background:none;">
+                    <button type="submit" name="language" value="es" class="btn btn-link p-0">
                         <img src="{% static 'img/lang-img/lang_ES.png' %}" width="25" height="20" alt="Spanish">
                     </button>
                 </form>
                 <form action="{% url 'set_language' %}" method="post" style="display:inline;">
                     {% csrf_token %}
                     <input type="hidden" name="next" value="{{ request.path }}">
-                    <button type="submit" name="language" value="ca" style="border:none;background:none;">
+                    <button type="submit" name="language" value="ca" class="btn btn-link p-0">
                         <img src="{% static 'img/lang-img/lang_CAT.png' %}" width="25" height="20" alt="Catalan">
                     </button>
                 </form>
                 <form action="{% url 'set_language' %}" method="post" style="display:inline;">
                     {% csrf_token %}
                     <input type="hidden" name="next" value="{{ request.path }}">
-                    <button type="submit" name="language" value="en" style="border:none;background:none;">
+                    <button type="submit" name="language" value="en" class="btn btn-link p-0">
                         <img src="{% static 'img/lang-img/lang_EN.png' %}" width="25" height="20" alt="English">
                     </button>
                 </form>
@@ -48,7 +67,7 @@
 </div>
 {% block content %}{% endblock %}
 <!-- Footer -->
-<footer class="container-fluid bg-light">
+<footer class="container-fluid bg-light col-12">
     <!-- Contact Section -->
     <div class="container">
         <div id="contact" class="mx-auto">
@@ -177,8 +196,19 @@
             Courier New,
             monospace;
     }
+
     h3 {
         color: #e22658;
+    }
+
+    .card {
+        background-color: #f2f2f2;
+    }
+
+    .img-fluid {
+        max-width: 100%;
+        width: 100%;
+        height: 50%;
     }
 
     a {
@@ -204,5 +234,19 @@
         width: 100%;
         z-index: 1000;
         background-color: WhiteSmoke;
+    }
+
+    .img-header {
+        max-width: 100%;
+        height: auto;
+    }
+
+    #nav-bar .nav-link {
+        color: black;
+        padding: 0.5rem 1rem;
+    }
+
+    #main-nav-bar form {
+        margin-left: 5px;
     }
 </style>
