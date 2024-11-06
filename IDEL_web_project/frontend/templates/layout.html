@@ -14,9 +14,9 @@
 <body>
 <!-- Menu -->
 <div class="container-fluid">
-    <div class="row align-items-center py-3">
+    <div class="row align-items-center">
         <!-- Imagen del header -->
-        <div class="col-12 col-md-4 text-center text-md-start">
+        <div class="col-12 col-md-2 col-sm-12 text-center text-md-start">
             <a href="/">
                 <img src="{% static 'img/headers-img/IDEL-header-img.png' %}" alt="header_IDEL"
                      class="img-fluid img-header">
@@ -24,7 +24,7 @@
         </div>
 
         <!-- Menú de navegación -->
-        <div class="col-12 col-md-6 d-flex justify-content-center justify-content-md-start mt-3 mt-md-0">
+        <div class="col-12 col-md-8 col-sm-6 d-flex justify-content-center justify-content-md-start mt-3 mt-md-0">
             <nav id="nav-bar">
                 <ul class="nav flex-column flex-md-row">
                     <li class="nav-item"><a class="nav-link" href="#recommended_projects">{% trans 'Recomendados' %}</a></li>
@@ -38,7 +38,7 @@
         </div>
 
         <!-- Banderas de idioma -->
-        <div class="col-12 col-md-2 d-flex justify-content-center justify-content-md-end mt-3 mt-md-0">
+        <div class="col-12 col-md-2 col-sm-6 d-flex justify-content-center justify-content-md-end mt-3 mt-md-0">
             <div id="main-nav-bar" class="d-flex">
                 <form action="{% url 'set_language' %}" method="post" style="display:inline;">
                     {% csrf_token %}
@@ -179,7 +179,6 @@
     }
     html, body {
       height: 100%;
-      padding-top: 20px;
     }
     html {
         font-family: system-ui, sans-serif;
