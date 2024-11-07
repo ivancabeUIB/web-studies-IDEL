@@ -139,7 +139,7 @@
     const JSZipCDN = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.6.0/jszip.min.js';
 
     // Realizar la solicitud GET para obtener JSZip desde la CDN
-    fetch(JSZipCDN)
+    fetch()JSZipCDN
       .then(response => {
         if (!response.ok) {
           throw new Error('Error al cargar JSZip desde la CDN: ' + response.status);
@@ -152,11 +152,11 @@
 
         // Resto del código que procesa el archivo ZIP
         let jatos_api_url = "https://labidel.uib.es/jatos/api/v1/results/data?studyId=";
-        let get_id = 34;
+        let get_id = 28;
         let url = `${jatos_api_url}${get_id}`;
 
         let headers = {
-          'Authorization': 'Bearer jap_NmKcp0yodG3oPY7HDP0GnO8cpdJ47bH3d6668'
+          'Authorization': 'Bearer jap_7Z2FmsGbK1AJQMOvuxOiSAMikCZeRG39d50ef'
         };
 
         let requestOptions = {
