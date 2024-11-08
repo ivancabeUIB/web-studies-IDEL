@@ -38,7 +38,7 @@ class ObtenerConvertirJzipGraficarView(TemplateView): #TODO:Separar responsabili
         jatos_api_url = "https://labidel.uib.es/jatos/api/v1/results/data?studyId="
         get_id = 28
         url = f"{jatos_api_url}{get_id}"
-        token = 'jap_7Z2FmsGbK1AJQMOvuxOiSAMikCZeRG39d50ef'
+        token = 'jap_7Z2FmsGbK1AJQMOvuxOiSAMikCZeRG39d50ef' #Creado 7/11/2024. Caduca en 1 mes.
 
         headers = {
             'Authorization': f'Bearer {token}',
@@ -53,41 +53,51 @@ class ObtenerConvertirJzipGraficarView(TemplateView): #TODO:Separar responsabili
             # Cargar el contenido de response como un archivo ZIP en memoria
             archivo_jzip = BytesIO(response.content)
             # Descomprimir el archivo .zip
-            datos_combinados = self.descomprimir_jzip(archivo_jzip)
+            datos_mapeados = self.descomprimir_jzip_y_mapeo_general(archivo_jzip)
+
+            #Llamar función que mapee de una forma concreta para un grafico concreto
 
             # Pasar los datos al template para graficar
-            return render(request, 'charts_test.html', {'datos_json': json.dumps(datos_combinados)})
+            return render(request, 'charts_test.html', {'datos_json': json.dumps(datos_mapeados)})
 
         except requests.exceptions.RequestException as e:
             # Si ocurre algún error durante la solicitud GET
             return JsonResponse({'error': str(e)}, status=400)
 
-    def descomprimir_jzip(self, archivo_jzip):
+    def descomprimir_jzip_y_mapeo_general(self, archivo_jzip):
         """Descomprime el archivo .jzip y combina los datos JSON."""
-        datos_combinados = []
-
+        datos_generales = []
+        count_JSON = 0
+        count_Total = 0
         try:
             # Abre y descomprime el archivo .jzip como un archivo ZIP
             with zipfile.ZipFile(archivo_jzip, 'r') as archivo_zip:
-                print(archivo_zip)
+
                 for nombre_archivo in archivo_zip.namelist():
-                    print(nombre_archivo)
+
                     if nombre_archivo.endswith('.txt'):
                         # Cargar el contenido de cada archivo .txt
                         with archivo_zip.open(nombre_archivo) as archivo_txt:
                             contenido = archivo_txt.read().decode('utf-8')
-
-                            # Intentar convertir el contenido a JSON
                             try:
+                                # Intentar convertir el contenido a JSON
                                 datos = json.loads(contenido)
-                                datos_combinados.append(datos)
-                                print(f"El archivo {nombre_archivo} esá en formato JSON")
+                                if 'data' in datos and isinstance(datos['data'], list):
+                                    dic_persona_respondiendo = {f"StudyResultId_{datos['context']['jatosStudyResultId']}":[]}
+                                    # Iterar sobre cada elemento en 'data'
+                                    for respuesta in datos['data']:
+                                        if 'mail' not in respuesta:
+                                            #añadir la respuesta a datos_graficables
+                                            dic_persona_respondiendo[f"StudyResultId_{datos['context']['jatosStudyResultId']}"].append(respuesta)
+                                    datos_generales.append(dic_persona_respondiendo)
+                                count_JSON +=1
+                                count_Total +=1
                             except json.JSONDecodeError:
-                                print(f"El archivo {nombre_archivo} no está en formato JSON.")
-                                print(f"El formato es este: {contenido}")
+                                count_Total +=1
 
         except Exception as e:
             # Si hay un error durante la descompresión
             raise ValueError(f"Error al descomprimir el archivo .jzip: {str(e)}")
-
-        return datos_combinados
+        print(f"JSON:{count_JSON},Total:{count_Total}")
+        print("Datos generales:", datos_generales[:2])
+        return datos_generales

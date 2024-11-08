@@ -2,13 +2,50 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <title>Title</title>
 </head>
 <body>
   <p>Charts Testing</p>
-  <p>...</p>
+  <div id="chart_div" style="width: 900px; height: 500px;"></div>
+<script type="text/javascript">
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+      // Parseamos los datos pasados desde Django
+      const datos = {{ datos_json|safe }};
+
+      // Creamos una tabla de datos para Google Charts
+      const data = new google.visualization.DataTable();
+      data.addColumn('number', 'Tiempo de Respuesta SAMA');
+
+      // Agregamos solo los valores de `response_time_SAMA_keyboard_response` al histograma
+      datos.forEach(entry => {
+        data.addRow([entry.response_time_SAMA_keyboard_response]);
+      });
+
+      // Opciones de configuración para el histograma
+      const options = {
+        title: 'Distribución de Tiempos de Respuesta SAMA',
+        legend: { position: 'none' },
+        hAxis: {
+          title: 'Tiempo de Respuesta (ms)',
+          maxValue: 1000,
+        },
+        histogram: {
+          lastBucketPercentile: 10,
+        },
+        vAxis: {
+          title: 'Frecuencia',
+        },
+      };
+
+      // Dibujar el histograma
+      const chart = new google.visualization.Histogram(document.getElementById('chart_div'));
+      chart.draw(data, options);
+    }
+  </script>
 </body>
-<script>
-    console.log(datos_json);
-</script>
+
 </html>
