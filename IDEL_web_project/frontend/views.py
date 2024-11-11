@@ -34,70 +34,65 @@ class IndexView(TemplateView):
 class ObtenerConvertirJzipGraficarView(TemplateView): #TODO:Separar responsabilidades de cada función
     template_name = 'charts_test.html'
     def get(self, request, **kwargs):
-        # Definir la URL de la API de JATOS para obtener el archivo .jzip
+
         jatos_api_url = "https://labidel.uib.es/jatos/api/v1/results/data?studyId="
         get_id = 28
         url = f"{jatos_api_url}{get_id}"
-        token = 'jap_7Z2FmsGbK1AJQMOvuxOiSAMikCZeRG39d50ef' #Creado 7/11/2024. Caduca en 1 mes.
+        token = 'jap_7Z2FmsGbK1AJQMOvuxOiSAMikCZeRG39d50ef'
 
         headers = {
             'Authorization': f'Bearer {token}',
         }
 
         try:
-            # Realizar la solicitud GET a la API de JATOS para obtener el archivo .jzip
+
             response = requests.get(url, headers=headers)
-            response.raise_for_status()  # Verifica si la solicitud fue exitosa
-            #print(response.content) -> Checkeado: Correcto. El contenido se recibe correctamente
+            response.raise_for_status()
 
-            # Cargar el contenido de response como un archivo ZIP en memoria
             archivo_jzip = BytesIO(response.content)
-            # Descomprimir el archivo .zip
-            datos_mapeados = self.descomprimir_jzip_y_mapeo_general(archivo_jzip)
+            datos_mapeados = self.descomprimir_zip_y_mapeo_general(archivo_jzip)
 
-            #Llamar función que mapee de una forma concreta para un grafico concreto
-
-            # Pasar los datos al template para graficar
             return render(request, 'charts_test.html', {'datos_json': json.dumps(datos_mapeados)})
 
         except requests.exceptions.RequestException as e:
-            # Si ocurre algún error durante la solicitud GET
             return JsonResponse({'error': str(e)}, status=400)
 
-    def descomprimir_jzip_y_mapeo_general(self, archivo_jzip):
+    def descomprimir_zip_y_mapeo_general(self, archivo_zip):
         """Descomprime el archivo .jzip y combina los datos JSON."""
         datos_generales = []
-        count_JSON = 0
-        count_Total = 0
+
         try:
-            # Abre y descomprime el archivo .jzip como un archivo ZIP
-            with zipfile.ZipFile(archivo_jzip, 'r') as archivo_zip:
+            with zipfile.ZipFile(archivo_zip, 'r') as archivo_zip:
 
                 for nombre_archivo in archivo_zip.namelist():
 
                     if nombre_archivo.endswith('.txt'):
-                        # Cargar el contenido de cada archivo .txt
                         with archivo_zip.open(nombre_archivo) as archivo_txt:
                             contenido = archivo_txt.read().decode('utf-8')
+
                             try:
-                                # Intentar convertir el contenido a JSON
                                 datos = json.loads(contenido)
-                                if 'data' in datos and isinstance(datos['data'], list):
-                                    dic_persona_respondiendo = {f"StudyResultId_{datos['context']['jatosStudyResultId']}":[]}
-                                    # Iterar sobre cada elemento en 'data'
+                                if 'data' in datos and 'context' in datos:
+                                    study_result_id = datos['context'].get('jatosStudyResultId')
+                                    dic_persona_respondiendo = {f'StudyResultId_{study_result_id}':{}}
+                                    dic_datos_persona = {'data':[], 'context':{}}
+                                    for item,value in datos['context'].items():
+                                        dic_datos_persona['context'][item] = value
                                     for respuesta in datos['data']:
-                                        if 'mail' not in respuesta:
-                                            #añadir la respuesta a datos_graficables
-                                            dic_persona_respondiendo[f"StudyResultId_{datos['context']['jatosStudyResultId']}"].append(respuesta)
+                                        if 'mail' in respuesta:
+                                            dic_datos_persona['context']['mail'] = respuesta['mail']
+                                        else:
+                                            dic_datos_persona['data'].append(respuesta)
+                                    if not 'mail' in dic_datos_persona['context']:
+                                        dic_datos_persona['context']['mail'] = ""
+                                    dic_persona_respondiendo[f'StudyResultId_{study_result_id}']= dic_datos_persona
                                     datos_generales.append(dic_persona_respondiendo)
-                                count_JSON +=1
-                                count_Total +=1
+
                             except json.JSONDecodeError:
-                                count_Total +=1
+                                print("No hay una estructura JSON correcta")
 
         except Exception as e:
-            # Si hay un error durante la descompresión
-            raise ValueError(f"Error al descomprimir el archivo .jzip: {str(e)}")
-        print(f"JSON:{count_JSON},Total:{count_Total}")
-        print("Datos generales:", datos_generales[:2])
+            print(f"Error al descomprimir el archivo .jzip: {str(e)}")
+
+        print(f'datos finales: {datos_generales}')
         return datos_generales
