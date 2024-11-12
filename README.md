@@ -34,9 +34,11 @@ _Antes de empezar, asegúrate de tener instaladas las herramientas necesarias:_
 * Se necesita un IDE como [PyCharm Community Edition 2024.2.1](https://www.jetbrains.com/es-es/pycharm/download/?section=windows) o [VSCode 1.93](https://code.visualstudio.com/download), o versiones posteriores. 
 * Una vez instalado el IDE y el paquete Python, son necesarios los paquetes [pip](https://pip.pypa.io/en/stable/installation/) y [venv](https://docs.python.org/3/library/venv.html), que normalmente están incluidos en las instalaciones anteriores. Para evitar posibles errores, es conveniente verificar si se tiene instalado los paquetes.
 * Se deben instalar los paquetes [Django](https://www.djangoproject.com/) y [Pillow](https://python-pillow.org/) a partir de la terminal del IDE.
+* También se debe instalar el paquete [requests 2.32.3](https://pypi.org/project/requests/).
 ```
-pip install django
-pip install pillow
+$ python pip install Django
+$ python pip install Pillow
+$ python pip install requests
 ```
 
 
@@ -70,7 +72,7 @@ _Estas son las herramientas que se utilizaron para crear este proyecto_
 * [Django](https://www.djangoproject.com/)- El framework web
 * [JATOS](https://www.jatos.org/) - API de OpenSesame
 * [OpenSesame](https://www.opensesame.com/es/home) - Diseñador de experimentos
-* [OSWeb]() - Entorno Web de ejecución de experimentos OpenSesame
+* [OSWeb](https://osdoc.cogsci.nl/3.3/manual/osweb/osweb/) - Entorno Web de ejecución de experimentos OpenSesame
 
 ## Wiki 📓
 

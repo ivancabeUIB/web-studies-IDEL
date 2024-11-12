@@ -2,7 +2,6 @@ from io import BytesIO
 from django.http import JsonResponse
 from django.views.generic.base import TemplateView
 from .models import Project, Task, Scale, FooterBanner, InvestStudies
-import os
 import json
 import zipfile
 import requests
@@ -96,3 +95,6 @@ class ObtenerConvertirJzipGraficarView(TemplateView): #TODO:Separar responsabili
 
         print(f'datos finales: {datos_generales}')
         return datos_generales
+
+class TestStatisticsView(TemplateView):
+    template_name = 'statistic.html'

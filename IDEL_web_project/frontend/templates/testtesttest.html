@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Rendimiento</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .stat-card {
+            padding: 20px;
+            margin: 10px;
+            border-radius: 8px;
+            background-color: #f8f9fa;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container mt-4">
+    <h1 class="text-center">Dashboard de Rendimiento</h1>
+
+    <div class="row">
+        <!-- Métrica: Porcentaje de respuesta rápida -->
+        <div class="col-md-4">
+            <div class="stat-card">
+                <h4>Porcentaje de Respuestas Rápidas</h4>
+                <p id="fast-response-percentage">75%</p> <!-- Esto se actualizará dinámicamente -->
+            </div>
+        </div>
+
+        <!-- Métrica: Aciertos en la prueba -->
+        <div class="col-md-4">
+            <div class="stat-card">
+                <h4>Aciertos Totales</h4>
+                <p id="total-correct">45 / 50</p> <!-- Esto se actualizará dinámicamente -->
+            </div>
+        </div>
+
+        <!-- Métrica: Duración entre respuestas -->
+        <div class="col-md-4">
+            <div class="stat-card">
+                <h4>Duración entre Respuestas</h4>
+                <canvas id="responseTimeChart" width="100" height="100"></canvas> <!-- Gráfica -->
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <!-- Otra gráfica o estadística -->
+        <div class="col-md-12">
+            <div class="stat-card">
+                <h4>Gráfica de Tiempo de Respuesta</h4>
+                <canvas id="responseDurationChart" width="400" height="150"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Script para cargar datos en Chart.js -->
+<script>
+    // Porcentaje de respuestas rápidas - Este valor se actualizará con datos del backend
+    document.getElementById("fast-response-percentage").innerText = "75%"; // Valor de ejemplo
+
+    // Aciertos totales - Este valor se actualizará con datos del backend
+    document.getElementById("total-correct").innerText = "45 / 50"; // Valor de ejemplo
+
+    // Gráfica de la duración entre respuestas
+    const ctx = document.getElementById('responseTimeChart').getContext('2d');
+    const responseTimeChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['0s', '1s', '2s', '3s', '4s', '5s'], // Ejemplo de etiquetas de tiempo
+            datasets: [{
+                label: 'Tiempo entre respuestas',
+                data: [1.2, 2.1, 1.8, 2.5, 1.9, 2.3], // Datos de ejemplo
+                borderColor: 'rgba(75, 192, 192, 1)',
+                fill: false,
+                tension: 0.1
+            }]
+        },
+        options: {
+            scales: {
+                x: {
+                    display: true,
+                    title: { display: true, text: 'Tiempo (s)' }
+                },
+                y: {
+                    display: true,
+                    title: { display: true, text: 'Duración (s)' }
+                }
+            }
+        }
+    });
+</script>
+
+<!-- Bootstrap JS y dependencias -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
