@@ -1,6 +1,6 @@
 from django.contrib import admin
 from parler.admin import TranslatableAdmin
-from .models import Project, Task, Scale, InvestStudies, FooterBanner
+from .models import Project, Task, Scale, InvestStudies, FooterBanner, ImageFavicon
 
 
 @admin.register(Project)
@@ -26,3 +26,8 @@ class InvestStudiesAdmin(TranslatableAdmin):
 @admin.register(FooterBanner)
 class FooterBannerAdmin(admin.ModelAdmin):
     list_display = ('id', 'x_twitter', 'cookies_policy', 'privacy_url')
+
+
+@admin.register(ImageFavicon)
+class ImageFaviconAdmin(admin.ModelAdmin):
+    list_display = ('id',)
