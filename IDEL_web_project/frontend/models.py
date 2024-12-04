@@ -1,49 +1,61 @@
 from django.db import models
+from parler.models import TranslatableModel, TranslatedFields
+from django.utils.translation import gettext_lazy as _
 
 
-class Project(models.Model):
-    name = models.CharField(max_length=150)
-    description = models.TextField()
+class Project(TranslatableModel):
+    translations = TranslatedFields(
+        name=models.CharField(max_length=150, verbose_name=_('Name')),
+        description=models.TextField(verbose_name=_('Description')),
+    )
     photo = models.ImageField(upload_to='cards-img/', blank=True, null=True)
     url_to_jatos = models.URLField(max_length=200, default='')
     is_active = models.BooleanField(default=False)
     is_recommended = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.name
+        return self.safe_translation_getter('name', any_language=True)
 
 
-class Task(models.Model):
-    name = models.CharField(max_length=150)
-    description = models.TextField()
-    photo = models.ImageField(upload_to='cards-img/')
+class Task(TranslatableModel):
+    translations = TranslatedFields(
+        name=models.CharField(max_length=150, verbose_name=_('Name')),
+        description=models.TextField(verbose_name=_('Description')),
+    )
+    photo = models.ImageField(upload_to='cards-img/', null=True, blank=True)
     url_to_jatos = models.URLField(max_length=200, default='')
     is_active = models.BooleanField(default=False)
     is_recommended = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.name
+        return self.safe_translation_getter('name', any_language=True)
 
 
-class Scale(models.Model):
-    name = models.CharField(max_length=150)
-    description = models.TextField()
-    photo = models.ImageField(upload_to='cards-img/')
+class Scale(TranslatableModel):
+    translations = TranslatedFields(
+        name=models.CharField(max_length=150, verbose_name=_('Name')),
+        description=models.TextField(verbose_name=_('Description')),
+    )
+    photo = models.ImageField(upload_to='cards-img/', null=True, blank=True)
     url_to_jatos = models.URLField(max_length=200, default='')
     is_active = models.BooleanField(default=False)
     is_recommended = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.name
+        return self.safe_translation_getter('name', any_language=True)
 
-class InvestStudies(models.Model):
-    name = models.CharField(max_length=150)
-    description = models.TextField()
-    photo = models.ImageField(upload_to='cards-img/')
+
+class InvestStudies(TranslatableModel):
+    translations = TranslatedFields(
+        name=models.CharField(max_length=150, verbose_name=_('Name')),
+        description=models.TextField(verbose_name=_('Description')),
+    )
+    photo = models.ImageField(upload_to='cards-img/', null=True, blank=True)
     is_active = models.BooleanField(default=False)
+    is_recommended = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.name
+        return self.safe_translation_getter('name', any_language=True)
 
 
 class FooterBanner(models.Model):

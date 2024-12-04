@@ -11,7 +11,14 @@ class IndexView(TemplateView):
         context['tasks'] = Task.objects.filter(is_active=True)
         context['scales'] = Scale.objects.filter(is_active=True)
         context['investStudies'] = InvestStudies.objects.filter(is_active=True)
-        context['recommended_projects'] = Project.objects.filter(is_active=True, is_recommended=True)
-        context['get_first_banner_queryset'] = FooterBanner.objects.all()[0]
+        context['get_first_banner_queryset'] = FooterBanner.objects.all().first()
+
+        # Nueva lista combinada de todos los elementos recomendados
+        recommended_items = list(Project.objects.filter(is_active=True, is_recommended=True)) + \
+                            list(Task.objects.filter(is_active=True, is_recommended=True)) + \
+                            list(Scale.objects.filter(is_active=True, is_recommended=True)) + \
+                            list(InvestStudies.objects.filter(is_active=True, is_recommended=True))
+
+        context['recommended_items'] = recommended_items
 
         return context
