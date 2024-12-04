@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     # Own apps
     'frontend',
     'IDEL_web_project',
+    'users_code_scale',
     # Other apps
     'parler',
 ]
