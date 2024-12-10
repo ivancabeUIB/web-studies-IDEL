@@ -126,8 +126,8 @@ PARLER_LANGUAGES = {
         {'code': 'es', 'name': 'Spanish'},
     ),
     'default': {
-        'fallback': 'ca',  # Idioma predeterminado
-        'hide_untranslated': False,  # Mostrar entradas aunque no estén traducidas
+        'fallback': 'ca',
+        'hide_untranslated': False,
     }
 }
 
