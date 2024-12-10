@@ -1,128 +1,138 @@
 {% extends 'layout.html' %}
 {% load i18n %}
-{% block title %}IDEL Home{% endblock %}
+{% block title %}OpenAT{% endblock %}
 {% block content %}
-<!-- Page content -->
 <div id="main_content" class="container mt-5">
     <!-- Project Section -->
     {% if recommended_items %}
     <div id="recommended_projects">
         <h3>{% trans 'Recomendados' %}</h3>
     </div>
-    <div id="recommended_cardContainer">
+    <div id="recommended_cardContainer" class="row col-12">
         {% for recommended in recommended_items %}
-        <div class="card border p-3 mt-2 mb-2" style="background-color: #f2f2f2;">
-            <a href="{{ project.url_to_jatos }}">
-                <div>
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-12 text-center">
-                                <p class="mb-0"><b>{{ recommended.name }}</b></p>
+        <div class="col-12 col-md-3">
+            <div class="card border p-3 mt-2 mb-2">
+                <a href="{{ recommended.url }}">
+                    <div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12 text-center">
+                                    <p class="mb-0"><b>{{ recommended.name }}</b></p>
+                                </div>
                             </div>
                         </div>
+                        {% if recommended.photo %}
+                        <br>
+                        <div class="text-center">
+                            <img src="{{ recommended.photo.url }}" alt="{{ recommended.name }}" class="img-fluid"/>
+                        </div>
+                        {% endif %}
+                        {% if recommended.description %}
+                        <div class="description mt-2">
+                            <p>{{ recommended.description }}</p>
+                        </div>
+                        {% endif %}
                     </div>
-                    {% if recommended.photo %}
-                    <br>
-                    <div class="text-center">
-                        <img src="{{ recommended.photo.url }}" alt="{{ recommended.name }}" class="img-fluid"
-                             style="max-width: 100%; width: 1000px; height: 460px;"/>
-                    </div>
-                    {% endif %}
-                </div>
-            </a>
+                </a>
+            </div>
         </div>
         {% endfor %}
     </div>
     {% endif %}
+
     {% if projects %}
     <div id="projects">
         <h3>{% trans 'Proyectos' %}</h3>
     </div>
-    <div id="projects_cardContainer">
+    <div id="projects_cardContainer" class="row">
         {% for project in projects %}
-        <div class="card border p-3 mt-2 mb-2" style="background-color: #f2f2f2;">
-            <a href="{{ project.url_to_jatos }}">
-                <div>
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-12 text-center">
-                                <p class="mb-0"><b>{{ project.name }}</b></p>
+        <div class="col-12 col-md-4">
+            <div class="card border p-3 mt-2 mb-2">
+                <a href="{{ project.url }}">
+                    <div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12 text-center">
+                                    <p class="mb-0"><b>{{ project.name }}</b></p>
+                                </div>
                             </div>
                         </div>
+                        {% if project.photo %}
+                        <br>
+                        <div class="text-center">
+                            <img src="{{ project.photo.url }}" alt="{{ project.name }}" class="img-fluid"/>
+                        </div>
+                        {% endif %}
                     </div>
-                    {% if project.photo %}
-                    <br>
-                    <div class="text-center">
-                        <img src="{{ project.photo.url }}" alt="{{ project.name }}" class="img-fluid"
-                             style="max-width: 100%; width: 1000px; height: 460px;"/>
-                    </div>
-                    {% endif %}
-                </div>
-            </a>
+                </a>
+            </div>
         </div>
         {% endfor %}
     </div>
     {% endif %}
+
     {% if scales %}
     <div id="scale">
         <h3>{% trans 'Baremos' %}</h3>
     </div>
-    <div id="scale_cardContainer">
+    <div id="scale_cardContainer" class="row">
         {% for scale in scales %}
-        <div class="card border p-3 mt-2 mb-2" style="background-color: #f2f2f2;">
-            <a href="{{ scale.url_to_jatos }}">
-                <div>
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-12 text-center">
-                                <p class="mb-0"><b>{{ scale.name }}</b></p>
+        <div class="col-12 col-md-4">
+            <div class="card border p-3 mt-2 mb-2">
+                <a href="{{ scale.url }}">
+                    <div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12 text-center">
+                                    <p class="mb-0"><b>{{ scale.name }}</b></p>
+                                </div>
                             </div>
                         </div>
+                        {% if scale.photo %}
+                        <br>
+                        <div class="text-center">
+                            <img src="{{ scale.photo.url }}" alt="{{ scale.name }}" class="img-fluid"/>
+                        </div>
+                        {% endif %}
                     </div>
-                    <br>
-                    {% if scale.photo %}
-                    <div class="text-center">
-                        <img src="/" alt="/" class="img-fluid"
-                             style="max-width: 100%; width: 1000px; height: 460px;"/>
-                    </div>
-                    {% endif %}
-                </div>
-            </a>
+                </a>
+            </div>
         </div>
         {% endfor %}
     </div>
     {% endif %}
+
     {% if investStudies %}
     <div id="investStudies">
-      <h3>{% trans 'Investigaciones' %}</h3>
+        <h3>{% trans 'Investigaciones' %}</h3>
     </div>
-    <div id="invest_cardContainer">
+    <div id="invest_cardContainer" class="row">
         {% for invest in investStudies %}
-        <div class="card border p-3 mt-2 mb-2" style="background-color: #f2f2f2;">
-                <div>
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-12 text-center">
-                                <p class="mb-0"><b>{{ invest.name }}</b></p>
-                            </div>
-                            <div class="col-12 text-center">
-                                <p class="mb-0">{{ invest.description }}</p>
+        <div class="col-12 col-md-4">
+            <div class="card border p-3 mt-2 mb-2">
+                <a href="{{ invest.url }}">
+                    <div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12 text-center">
+                                    <p class="mb-0"><b>{{ invest.name }}</b></p>
+                                </div>
                             </div>
                         </div>
+                        {% if invest.photo %}
+                        <br>
+                        <div class="text-center">
+                            <img src="{{ invest.photo.url }}" alt="{{ invest.name }}" class="img-fluid"/>
+                        </div>
+                        {% endif %}
                     </div>
-                    <br>
-                    {% if invest.photo %}
-                    <div class="text-center">
-                        <img src="/" alt="/" class="img-fluid"
-                            style="max-width: 100%; width: 1000px; height: 460px;"/>
-                    </div>
-                    {% endif %}
-                </div>
-            </a>
+                </a>
+            </div>
         </div>
         {% endfor %}
     </div>
     {% endif %}
+
     <!-- About Section -->
     <div>
         <h3>{% trans 'Sobre nosotros' %}</h3>

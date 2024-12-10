@@ -3,7 +3,11 @@
   <component name="Black">
     <option name="sdkName" value="Python 3.10 (IDEL-projects)" />
   </component>
+<<<<<<< HEAD
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.10 (IDEL-projects)" project-jdk-type="Python SDK" />
+=======
   <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.12 (2)" project-jdk-type="Python SDK" />
+>>>>>>> 435d83d5a30aa41e6c291450dec733bc37b61e84
   <component name="PyCharmProfessionalAdvertiser">
     <option name="shown" value="true" />
   </component>

@@ -5,9 +5,14 @@
       <sourceFolder url="file://$MODULE_DIR$/IDEL_web_project" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/IDEL_web_project/IDEL_web_project" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/IDEL_web_project/frontend" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/IDEL_web_project/users_code_scale" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/venv" />
     </content>
+<<<<<<< HEAD
+    <orderEntry type="jdk" jdkName="Python 3.10 (IDEL-projects)" jdkType="Python SDK" />
+=======
     <orderEntry type="jdk" jdkName="Python 3.12 (2)" jdkType="Python SDK" />
+>>>>>>> 435d83d5a30aa41e6c291450dec733bc37b61e84
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>
