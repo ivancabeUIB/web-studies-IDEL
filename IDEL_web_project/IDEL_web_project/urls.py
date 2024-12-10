@@ -15,6 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from frontend.views import IndexView
+from users_code_scale.views import CodeForScaleView
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
@@ -24,6 +25,7 @@ urlpatterns = [
     path('i18n/', include('django.conf.urls.i18n')),
     path('admin/', admin.site.urls),
     path('', IndexView.as_view(), name="index"),
+    path('statistics/', CodeForScaleView.as_view(), name="code_show_scale"),
 ]
 
 if settings.DEBUG:
