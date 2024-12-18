@@ -2,18 +2,29 @@
 {% load i18n %}
 {% block title %}IDEL{% endblock %}
 {% block content %}
+
 <!-- Page content -->
 <div class="container mt-5">
     <!-- Project Section -->
     <div id="statistics" class="mb-5">
         <h1 class="text-center">{% trans 'Entrar a tus baremos' %}</h1>
-        <div class="statistics">
-            <p>{% trans 'Introduce el código' %}</p>
-            <form>
-            </form>
+        <div class="card shadow-sm mt-4">
+            <div class="card-body">
+                <h5 class="card-title text-center">{% trans 'Introduce el código' %}</h5>
+                <p class="card-text text-center">{% trans 'Ingresa el código que se te proporcionó para acceder a los baremos.' %}</p>
+                <form method="post" action="">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="code" class="form-label">{% trans 'Código' %}</label>
+                        <input type="text" name="code" id="code" class="form-control" placeholder="{% trans 'Introduce tu código aquí' %}" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">{% trans 'Enviar' %}</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>
+
 <style>
 .chart-container {
     width: 100%;
@@ -23,4 +34,5 @@
     border-radius: 5px;
 }
 </style>
+
 {% endblock content %}
