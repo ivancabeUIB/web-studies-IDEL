@@ -58,6 +58,11 @@ class InvestStudies(TranslatableModel):
         return self.safe_translation_getter('name', any_language=True)
 
 
+class ImageFavicon(models.Model):
+    alt_img = models.TextField()
+    img = models.ImageField(upload_to='cards-img/', blank=True, null=True)
+
+
 class FooterBanner(models.Model):
     facebook = models.URLField(max_length=200, default='', blank=True)
     x_twitter = models.URLField(max_length=200, default='', blank=True)
