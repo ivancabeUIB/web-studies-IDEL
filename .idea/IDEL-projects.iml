@@ -11,8 +11,12 @@
 <<<<<<< HEAD
     <orderEntry type="jdk" jdkName="Python 3.10 (IDEL-projects)" jdkType="Python SDK" />
 =======
+<<<<<<< HEAD
+    <orderEntry type="jdk" jdkName="Python 3.10 (IDEL-projects)" jdkType="Python SDK" />
+=======
     <orderEntry type="jdk" jdkName="Python 3.12 (2)" jdkType="Python SDK" />
 >>>>>>> 435d83d5a30aa41e6c291450dec733bc37b61e84
+>>>>>>> e1c8f0a75f839c4ba8de6560d45d906777fa16de
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>
