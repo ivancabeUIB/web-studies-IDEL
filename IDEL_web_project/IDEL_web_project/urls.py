@@ -22,10 +22,10 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('i18n/', include('django.conf.urls.i18n')),
-    path('admin/', admin.site.urls),
+    path('i18n', include('django.conf.urls.i18n')),
+    path('admin', admin.site.urls),
     path('', IndexView.as_view(), name="index"),
-    path('statistics/', CodeForScaleView.as_view(), name="code_show_scale"),
+    path('statistics', CodeForScaleView.as_view(), name="code_show_scale"),
 ]
 
 if settings.DEBUG:

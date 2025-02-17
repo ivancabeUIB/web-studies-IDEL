@@ -59,6 +59,8 @@ git clone https://github.com/ivancabeUIB/web-studies-IDEL
 // TODO
 
 _Agrega notas adicionales sobre como hacer deploy_
+
+INSTALACIÓN DE DOCKER
  
 
 

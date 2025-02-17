@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    container_name: IDEL_web_project
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    environment:
+      # Puedes definir variables de entorno aquí, por ejemplo:
+      - DEBUG=1
