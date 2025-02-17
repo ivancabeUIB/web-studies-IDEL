@@ -16,6 +16,7 @@ Including another URLconf
 """
 from frontend.views import IndexView
 from users_code_scale.views import CodeForScaleView
+from chatbot_ai.views import ChatbotAPI, ChatbotTesting
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
@@ -23,9 +24,11 @@ from django.urls import path, include
 
 urlpatterns = [
     path('i18n', include('django.conf.urls.i18n')),
+    path('api/chatbot', ChatbotAPI.as_view(), name="api_chatbot"),
     path('admin', admin.site.urls),
     path('', IndexView.as_view(), name="index"),
     path('statistics', CodeForScaleView.as_view(), name="code_show_scale"),
+    path('chatbot_testing', ChatbotTesting.as_view(), name="chatbot_testing")
 ]
 
 if settings.DEBUG:

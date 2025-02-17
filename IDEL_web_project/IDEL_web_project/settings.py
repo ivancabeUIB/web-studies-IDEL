@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'frontend',
     'IDEL_web_project',
     'users_code_scale',
+    'chatbot_ai',
     # Other apps
     'parler',
 ]
