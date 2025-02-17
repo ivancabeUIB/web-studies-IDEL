@@ -72,7 +72,7 @@ TEMPLATES = [
             ],
         },
     },
-]
+] 
 
 WSGI_APPLICATION = 'IDEL_web_project.wsgi.application'
 
