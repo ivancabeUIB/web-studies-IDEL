@@ -1,6 +1,8 @@
 ### Python template
 # Byte-compiled / optimized / DLL files
 __pycache__/
+IDEL_web_project/IDEL_web_project/__pycache__/
+IDEL_web_project/__pycache__/
 *.py[cod]
 *$py.class
 
