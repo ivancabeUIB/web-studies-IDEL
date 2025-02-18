@@ -1,26 +1,10 @@
----
-import Header from '../components/Header.astro';
-import Menu from '../components/Menu.astro';
-import Footer from '../components/Footer.astro';
-import Card from '../components/Card.astro';
-import Layout from '../layouts/Layout.astro';
-
-import { Image } from 'astro:assets';
-import lang_ES from '../images/lang-img/lang_ES.png';
-import lang_CAT from '../images/lang-img/lang_CAT.png';
-import lang_EN from '../images/lang-img/lang_EN.png';
-import header_IDEL from '../images/headers-img/IDEL-header-img.png';
----
-<Layout title="IDEL">
-<!-- Page content -->
-<div class="container mt-5">
-  <!-- Error 404 -->
-  <div>
-    <h3>Error 404</h3>
-    <p>
-      No se ha encontrado la url o archivo que buscas, vuelve al inicio.
-    </p>
-  </div>
-<!-- End page content -->
+{% extends 'layout.html' %}
+{% load i18n %}
+{% block title %}404 - {% trans "Página no encontrada" %}{% endblock %}
+{% block content %}
+<div class="container mt-5 text-center">
+    <h1 class="display-4">404</h1>
+    <p class="lead">{% trans "Lo sentimos, la página que buscas no existe." %}</p>
+    <a href="/" class="btn btn-primary">{% trans "Volver al inicio" %}</a>
 </div>
-</Layout>
+{% endblock %}

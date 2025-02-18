@@ -9,5 +9,4 @@ services:
     volumes:
       - .:/app
     environment:
-      # Puedes definir variables de entorno aquí, por ejemplo:
       - DEBUG=1

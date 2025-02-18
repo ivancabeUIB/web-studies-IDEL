@@ -1,0 +1,10 @@
+{% extends 'layout.html' %}
+{% load i18n %}
+{% block title %}500 - {% trans "Error interno del servidor" %}{% endblock %}
+{% block content %}
+<div class="container mt-5 text-center">
+    <h1 class="display-4">500</h1>
+    <p class="lead">{% trans "Ha ocurrido un error en el servidor. Por favor, intenta más tarde." %}</p>
+    <a href="/" class="btn btn-primary">{% trans "Volver al inicio" %}</a>
+</div>
+{% endblock %}
