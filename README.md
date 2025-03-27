@@ -86,13 +86,13 @@ _Se utilizó [Git](https://github.com/) para el versionado. Se pueden consultar 
 
 ## Autores ✒️👥
 
-_Se menciona a todos aquellos que ayudaron a levantar el proyecto desde sus inicios._
+_Se menciona a todos aquellos que ayudaron a levantar el proyecto desde sus inicios, incluyendo el desarrollo de la plataforma, la concepción del proyecto o la búsqueda de financiación._
 
 * **Ivan Cabellos Berber** - *Developer* - [ivancabeUIB_GitHub](https://github.com/ivancabeUIB)
 * **Alejandro Segura Alfaro** - *Developer* - [alexsegur_GitHub](https://github.com/alexsegur)
-* **Víctor A. Sánchez Azanza** - *Colaborador* - [Víctor - Personal UIB](https://www.uib.es/es/personal/ABjMxMzk1Nw/)
-* **Raül López Penadés** - *Colaborador* - [Raül - Personal UIB](https://www.uib.es/es/personal/ABjMwMjc4NA/)
-* **Daniel Adrover Roig** - *Subdirector* - [Daniel - Personal UIB](https://www.uib.es/es/personal/ABjE5MzQzNg/)
-* **Eva Aguilar Mediavilla** - *Directora* - [Eva - Personal UIB](https://www.uib.es/es/personal/ABTE1MjY1/)
+* **Víctor A. Sánchez Azanza** - *Colaborador científico principal* - [Personal UIB](https://www.uib.es/es/personal/ABjMxMzk1Nw/) [vitialex_GitHub](https://github.com/vitialex)
+* **Raül López Penadés** - *Colaborador científico principal* - [Personal UIB](https://www.uib.es/es/personal/ABjMwMjc4NA/)
+* **Daniel Adrover Roig** - *Co-director grupo de Investigación* - [Personal UIB](https://www.uib.es/es/personal/ABjE5MzQzNg/)
+* **Eva Aguilar Mediavilla** - *Co-directora grupo de Investigación* - [Personal UIB](https://www.uib.es/es/personal/ABTE1MjY1/)
 
 _También puedes mirar la lista de todos los [contribuyentes](https://github.com/your/project/contributors) que han participado en este proyecto._ 
