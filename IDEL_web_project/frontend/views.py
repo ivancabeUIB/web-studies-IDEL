@@ -1,5 +1,5 @@
 from django.views.generic.base import TemplateView
-from .models import Project, Task, Scale, FooterBanner, InvestStudies
+from .models import Project, Task, FooterBanner, InvestStudies, HeaderImage
 
 
 class IndexView(TemplateView):
@@ -9,16 +9,20 @@ class IndexView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['projects'] = Project.objects.filter(is_active=True)
         context['tasks'] = Task.objects.filter(is_active=True)
-        context['scales'] = Scale.objects.filter(is_active=True)
         context['investStudies'] = InvestStudies.objects.filter(is_active=True)
         context['get_first_banner_queryset'] = FooterBanner.objects.all().first()
+        context['get_first_header_banner_queryset'] = HeaderImage.objects.all().first()
 
         # Nueva lista combinada de todos los elementos recomendados
         recommended_items = list(Project.objects.filter(is_active=True, is_recommended=True)) + \
                             list(Task.objects.filter(is_active=True, is_recommended=True)) + \
-                            list(Scale.objects.filter(is_active=True, is_recommended=True)) + \
                             list(InvestStudies.objects.filter(is_active=True, is_recommended=True))
 
         context['recommended_items'] = recommended_items
 
         return context
+
+
+class AboutUsAdmin(TemplateView):
+    template_name = "about_us.html"
+

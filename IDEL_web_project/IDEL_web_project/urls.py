@@ -25,7 +25,7 @@ from django.urls import path, include
 urlpatterns = [
     path('i18n', include('django.conf.urls.i18n')),
     path('api/chatbot', ChatbotAPI.as_view(), name="api_chatbot"),
-    path('admin', admin.site.urls),
+    path('admin/', admin.site.urls),
     path('', IndexView.as_view(), name="index"),
     path('statistics', CodeForScaleView.as_view(), name="code_show_scale"),
     path('chatbot_testing', ChatbotTesting.as_view(), name="chatbot_testing")

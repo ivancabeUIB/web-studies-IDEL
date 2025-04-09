@@ -1,0 +1,20 @@
+{% extends 'layout.html' %}
+{% load i18n %}
+{% block title %}OpenAT{% endblock %}
+{% block content %}
+<div id="contact" class="mx-auto">
+    <h3 class="text-center mb-4">{% trans 'Contacto' %}</h3>
+    <p class="text-center">{% trans 'Ponte en contacto con nosotros sobre cualquier problema o duda.' %}</p>
+    <form id="contact-form" class="needs-validation" novalidate>
+        <div class="mb-3">
+            <input type="email" class="form-control" placeholder="Email" required name="from_name">
+            <div class="invalid-feedback">{% trans 'Por favor ingresa un email válido.' %}</div>
+        </div>
+        <div class="mb-3">
+            <textarea class="form-control" placeholder="Comentario" rows="5" required name="message"></textarea>
+            <div class="invalid-feedback">{% trans 'Por favor ingresa tu comentario.' %}</div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block mb-5">{% trans 'Enviar' %}</button>
+    </form>
+</div>
+{% endblock %}
