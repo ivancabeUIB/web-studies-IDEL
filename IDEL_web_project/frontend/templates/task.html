@@ -5,10 +5,11 @@
 <div id="main_content" class="container mt-5">
     <!-- About Section -->
     <div>
-        <h3>{% trans 'Sobre nosotros' %}</h3>
-        <p>
-            {{ about_us_content.description }}
-        </p>
+        <h3>{% trans 'Info Tareas' %}</h3>
+        <p>{{ task_info.name }}</p>
+        <p>{{ task_info.description }}</p>
+        <img src="{{ task_info.photo.url }}" alt="" width="700px" height="200px"/>
+        <a href="{{ task_info.url_to_jatos }}">{% trans 'Ir al estudio' %}</a>
     </div>
     <!-- End page content -->
 </div>

@@ -1,6 +1,6 @@
 from django.contrib import admin
 from parler.admin import TranslatableAdmin
-from .models import Project, Task, InvestStudies, FooterBanner, ImageFavicon, HeaderImage
+from .models import Project, Task, InvestStudies, FooterBanner, ImageFavicon, HeaderImage, AboutUsContent
 
 
 @admin.register(Project)
@@ -15,7 +15,7 @@ class TaskAdmin(TranslatableAdmin):
 
 @admin.register(InvestStudies)
 class InvestStudiesAdmin(TranslatableAdmin):
-    list_display = ('name', 'is_active', 'is_active')
+    list_display = ('name', 'is_active', 'is_recommended')
 
 
 @admin.register(FooterBanner)
@@ -30,4 +30,9 @@ class ImageFaviconAdmin(admin.ModelAdmin):
 
 @admin.register(HeaderImage)
 class ImageFaviconAdmin(admin.ModelAdmin):
+    list_display = ('id',)
+
+
+@admin.register(AboutUsContent)
+class ImageFaviconAdmin(TranslatableAdmin):
     list_display = ('id',)

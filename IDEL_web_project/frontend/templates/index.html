@@ -4,38 +4,44 @@
 {% block content %}
 <div id="main_content" class="container mt-5">
     <!-- Project Section -->
-    {% if recommended_items %}
+    {% if recommended_items_all %}
     <div id="recommended_projects">
         <h3>{% trans 'Recomendados' %}</h3>
     </div>
     <div id="recommended_cardContainer" class="row col-12">
+        {% for model_name, recommended_items in recommended_items_all.items %}
         {% for recommended in recommended_items %}
         <div class="col-12 col-md-3">
-            <div class="card border p-3 mt-2 mb-2">
-                <a href="{{ recommended.url }}">
-                    <div>
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-12 text-center">
-                                    <p class="mb-0"><b>{{ recommended.name }}</b></p>
-                                </div>
+            <div class="card border p-3 mb-2">
+                <a href="{% if model_name == 'projects' %}
+                            {% url 'project' recommended.id %}
+                         {% elif model_name == 'tasks' %}
+                            {% url 'task' recommended.id %}
+                         {% elif model_name == 'investstudies' %}
+                            {% url 'investstudies' recommended.id %}
+                         {% endif %}">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <p class="mb-0"><b>{{ recommended.name }}</b></p>
                             </div>
                         </div>
-                        {% if recommended.photo %}
-                        <br>
-                        <div class="text-center">
-                            <img src="{{ recommended.photo.url }}" alt="{{ recommended.name }}" class="img-fluid"/>
-                        </div>
-                        {% endif %}
-                        {% if recommended.description %}
-                        <div class="description mt-2">
-                            <p>{{ recommended.description }}</p>
-                        </div>
-                        {% endif %}
                     </div>
+                    {% if recommended.photo %}
+                    <br>
+                    <div class="text-center">
+                        <img src="{{ recommended.photo.url }}" alt="{{ recommended.name }}" class="img-fluid"/>
+                    </div>
+                    {% endif %}
+                    {% if recommended.description %}
+                    <div class="description mt-2">
+                        <p>{{ recommended.description }}</p>
+                    </div>
+                    {% endif %}
                 </a>
             </div>
         </div>
+        {% endfor %}
         {% endfor %}
     </div>
     {% endif %}
@@ -71,27 +77,32 @@
     </div>
     {% endif %}
 
-    {% if scales %}
-    <div id="scale">
-        <h3>{% trans 'Baremos' %}</h3>
+    {% if tasks %}
+    <div id="task" class="mt-4">
+        <h3>{% trans 'Tareas' %}</h3>
     </div>
-    <div id="scale_cardContainer" class="row">
-        {% for scale in scales %}
+    <div id="task_cardContainer" class="row mb-5">
+        {% for task in tasks %}
         <div class="col-12 col-md-4">
             <div class="card border p-3 mt-2 mb-2">
-                <a href="{{ scale.url }}">
+                <a href="{% url 'task' task_id=task.id %}">
                     <div>
                         <div class="container">
                             <div class="row">
                                 <div class="col-12 text-center">
-                                    <p class="mb-0"><b>{{ scale.name }}</b></p>
+                                    <p class="mb-0"><b>{{ task.name }}</b></p>
                                 </div>
                             </div>
                         </div>
-                        {% if scale.photo %}
+                        {% if task.photo %}
                         <br>
                         <div class="text-center">
-                            <img src="{{ scale.photo.url }}" alt="{{ scale.name }}" class="img-fluid"/>
+                            <img src="{{ task.photo.url }}" alt="{{ project.name }}" class="img-fluid"/>
+                        </div>
+                        {% endif %}
+                        {% if task.description %}
+                        <div class="description mt-2">
+                            <p>{{ task.description }}</p>
                         </div>
                         {% endif %}
                     </div>

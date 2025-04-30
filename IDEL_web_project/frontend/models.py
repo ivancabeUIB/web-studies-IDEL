@@ -46,7 +46,7 @@ class InvestStudies(TranslatableModel):
 
 class ImageFavicon(models.Model):
     alt_img = models.TextField()
-    img = models.ImageField(upload_to='cards-img/', blank=True, null=True)
+    img = models.ImageField(upload_to='favico-img/', blank=True, null=True)
 
 
 class FooterBanner(models.Model):
@@ -62,3 +62,15 @@ class FooterBanner(models.Model):
 
 class HeaderImage(models.Model):
     header_img = models.ImageField(upload_to='header-img/', blank=True, null=True)
+
+
+class AboutUsContent(TranslatableModel):
+    translations = TranslatedFields(
+        description=models.TextField(verbose_name=_('Description')),
+    )
+    active = models.BooleanField(default=False)
+
+
+class ContactContent(models.Model):
+    header_img = models.TextField()
+    active = models.BooleanField(default=False)

@@ -7,7 +7,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
           crossorigin="anonymous">
+    {% if favicon.img.url %}
     <link rel="icon" href="{{ favicon.img.url }}" type="image/x-icon">
+    {% endif %}
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
@@ -16,10 +18,9 @@
     <div class="row align-items-center">
         <!-- Imagen del header -->
         <div class="col-12 col-md-2 col-sm-12 text-center text-md-start">
-            <a href="/">
-                {% if get_first_header_banner_queryset %}
-                <img src="{{ get_first_header_banner_queryset.header_img.url }}" alt="header_IDEL"
-                     class="img-fluid img-header" width="700px" height="100px">
+            <a href="{% url 'index' %}">
+                {% if header_img %}
+                <img src="{{ header_img.header_img.url }}" alt="header_IDEL" class="img-fluid img-header">
                 {% endif %}
             </a>
         </div>
@@ -30,6 +31,7 @@
                     <li class="nav-item"><a class="nav-link" href="#recommended_projects">{% trans 'Recomendados' %}</a></li>
                     <li class="nav-item"><a class="nav-link" href="#projects">{% trans 'Proyectos' %}</a></li>
                     <li class="nav-item"><a class="nav-link" href="#investStudies">{% trans 'Investigaciones' %}</a></li>
+                    <!-- TODO: translate this -->
                     <li class="nav-item"><a class="nav-link btn-baremo" href="{% url 'code_show_scale' %}">{% trans 'Busca tu baremo' %}</a></li>
                 </ul>
             </nav>
@@ -70,44 +72,45 @@
     <!-- Contact Section -->
     <div class="container">
         <div class="d-flex flex-column justify-content-center">
-            <h3 class="text-center mb-4">{% trans 'Redes Sociales, Agradecimientos y Políticas' %}</h3>
-            <p class="nav-item"><a class="nav-link" href="#invest_cardContainer">{% trans 'Sobre nosotros' %}</a></p>
-            <p class="nav-item"><a class="nav-link" href="#contact">{% trans 'Contactanos' %}</a></p>
-            {% if get_first_banner_queryset %}
+            <h3 class="text-center mb-4 mt-4">{% trans 'Redes Sociales, Agradecimientos y Políticas' %}</h3>
+            <p class="nav-item"><a class="nav-link policy" href="{% url 'about_us' %}">{% trans 'Sobre nosotros' %}</a></p>
+            <!-- TODO: translate this -->
+            <p class="nav-item"><a class="nav-link policy" href="{% url 'contact' %}">{% trans 'Contactanos' %}</a></p>
+            {% if footer %}
             <div class="text-center mb-4">
                 <div class="col-12">
-                    {% if get_first_banner_queryset.facebook %}
+                    {% if footer.facebook %}
                     <a href="{{ footer.facebook }}">
                         <img src="{% static 'img/social_media/Facebook.png' %}"
                              alt="facebook_img" width="30" height="30"/>
                     </a>
                     {% endif %}
-                    {% if get_first_banner_queryset.instagram %}
+                    {% if footer.instagram %}
                     <a href="{{ footer.instagram }}">
                         <img src="{% static 'img/social_media/Instagram.png' %}"
                              alt="instagram_img" width="30" height="30"/>
                     </a>
                     {% endif %}
-                    {% if get_first_banner_queryset.threads %}
+                    {% if footer.threads %}
                     <a href="{{ footer.threads }}">
                         <img src="{% static 'img/social_media/Threads.png' %}"
                              alt="threads_img" width="30" height="30"/>
                     </a>
                     {% endif %}
-                    {% if get_first_banner_queryset.youtube %}
+                    {% if footer.youtube %}
                     <a href="{{ footer.youtube }}">
                         <img src="{% static 'img/social_media/youtube_logo.png' %}"
                              alt="youtube_img" width="30" height="30"/>
                     </a>
                     {% endif %}
-                    {% if get_first_banner_queryset.x_twitter %}
+                    {% if footer.x_twitter %}
                     <a href="{{ footer.x_twitter }}">
                         <img src="{% static 'img/social_media/x_logo.png' %}"
                              alt="x_img" width="30" height="30"/>
                     </a>
                     {% endif %}
                 </div>
-                {% if get_first_banner_queryset.banner_img %}
+                {% if footer.banner_img %}
                 <div class="col-12">
                     <img src="{{ footer.banner_img.url }}" alt="banner img"/>
                 </div>
@@ -131,23 +134,7 @@
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
         integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
-        crossorigin="anonymous"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser00000000000000000000000@4/dist/email.min.js"></script>
-<script type="text/javascript">
-    document.addEventListener('DOMContentLoaded', function() {
-        emailjs.init("Nf7slTmEwNvUSqS2F");
-
-        document.getElementById('contact-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            emailjs.sendForm('service_bwh4rgd', 'template_4i439oa', this)
-                .then(function(response) {
-                    alert('¡El mensaje se ha enviado correctamente!');
-                }, function(error) {
-                    alert('Hubo un problema al enviar el mensaje. Por favor, inténtelo de nuevo.');
-                });
-        });
-    });
+        crossorigin="anonymous">
 </script>
 </body>
 </html>
@@ -252,4 +239,24 @@
         border-color: black;
         text-decoration: none;
     }
+
+    .img-header {
+        max-width: 300px;
+        height: auto;
+    }
+
+    @media (min-width: 768px) {
+        .img-header {
+            max-width: 300px;
+            margin-top: 2%;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .img-header {
+            max-width: 200px;
+            margin-top: 2%;
+        }
+    }
+
 </style>

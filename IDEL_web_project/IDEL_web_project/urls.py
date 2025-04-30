@@ -14,7 +14,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from frontend.views import IndexView
+from frontend.views import IndexView, AboutUsContentView, ContactView, TaskView, InvestView, ProjectView
 from users_code_scale.views import CodeForScaleView
 from chatbot_ai.views import ChatbotAPI, ChatbotTesting
 from django.conf import settings
@@ -27,6 +27,11 @@ urlpatterns = [
     path('api/chatbot', ChatbotAPI.as_view(), name="api_chatbot"),
     path('admin/', admin.site.urls),
     path('', IndexView.as_view(), name="index"),
+    path('about_us', AboutUsContentView.as_view(), name="about_us"),
+    path('contact', ContactView.as_view(), name="contact"),
+    path('task/<int:task_id>/', TaskView.as_view(), name="task"),
+    path('investstudies/<int:invest_id>/', InvestView.as_view(), name='investstudies'),
+    path('project/<int:project_id>/', ProjectView.as_view(), name='project'),
     path('statistics', CodeForScaleView.as_view(), name="code_show_scale"),
     path('chatbot_testing', ChatbotTesting.as_view(), name="chatbot_testing")
 ]
