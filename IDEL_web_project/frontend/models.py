@@ -21,20 +21,7 @@ class Task(TranslatableModel):
     translations = TranslatedFields(
         name=models.CharField(max_length=150, verbose_name=_('Name')),
         description=models.TextField(verbose_name=_('Description')),
-    )
-    photo = models.ImageField(upload_to='cards-img/', null=True, blank=True)
-    url_to_jatos = models.URLField(max_length=200, default='')
-    is_active = models.BooleanField(default=False)
-    is_recommended = models.BooleanField(default=False)
-
-    def __str__(self):
-        return self.safe_translation_getter('name', any_language=True)
-
-
-class Scale(TranslatableModel):
-    translations = TranslatedFields(
-        name=models.CharField(max_length=150, verbose_name=_('Name')),
-        description=models.TextField(verbose_name=_('Description')),
+        general_info=models.TextField(verbose_name=_('Información General'), default="")
     )
     photo = models.ImageField(upload_to='cards-img/', null=True, blank=True)
     url_to_jatos = models.URLField(max_length=200, default='')
@@ -60,7 +47,7 @@ class InvestStudies(TranslatableModel):
 
 class ImageFavicon(models.Model):
     alt_img = models.TextField()
-    img = models.ImageField(upload_to='cards-img/', blank=True, null=True)
+    img = models.ImageField(upload_to='favico-img/', blank=True, null=True)
 
 
 class FooterBanner(models.Model):
@@ -72,3 +59,19 @@ class FooterBanner(models.Model):
     banner_img = models.ImageField(upload_to='cards-img/', blank=True, null=True)
     privacy_url = models.URLField(max_length=200, default='')
     cookies_policy = models.URLField(max_length=200, default='')
+
+
+class HeaderImage(models.Model):
+    header_img = models.ImageField(upload_to='header-img/', blank=True, null=True)
+
+
+class AboutUsContent(TranslatableModel):
+    translations = TranslatedFields(
+        description=models.TextField(verbose_name=_('Description')),
+    )
+    active = models.BooleanField(default=False)
+
+
+class ContactContent(models.Model):
+    header_img = models.TextField()
+    active = models.BooleanField(default=False)

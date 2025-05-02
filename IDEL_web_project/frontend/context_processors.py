@@ -1,11 +1,13 @@
-from .models import ImageFavicon, FooterBanner
+from .models import ImageFavicon, FooterBanner, HeaderImage
 
 
-def favicon_context(request):
-    #favicon = ImageFavicon.objects.all().first() if ImageFavicon.objects.all().exists() else ''
-    footer = FooterBanner.objects.all().first() if FooterBanner.objects.all().exists() else []
+def favicon_context(requests):
+    favicon = ImageFavicon.objects.all().first()
+    footer = FooterBanner.objects.all().first()
+    header_img = HeaderImage.objects.all().first()
 
     return {
-        #'favicon': favicon,
+        'favicon': favicon,
         'footer': footer,
+        'header_img': header_img,
     }

@@ -1,0 +1,63 @@
+{% extends 'layout.html' %}
+{% load i18n %}
+
+{% block title %}OpenAT{% endblock %}
+
+{% block content %}
+<div id="main_content" class="container mt-5">
+
+    <!-- Título y categorías -->
+    <div>
+        <h3>{{ task_info.name }}</h3>
+        <p>{% trans "Procesos a evaluar:" %} {{ task_info.categories }}</p>
+        <p>{% trans "Dificultad:" %} {{ task_info.difficulty }}</p>
+        <p>{% trans "Edad recomendada:" %} {{ task_info.recommended_age }}</p>
+    </div>
+
+    <!-- Imagen -->
+    <div>
+        <img src="{{ task_info.photo.url }}" alt="Imagen tarea" width="300" height="150"/>
+    </div>
+
+    <!-- Botones -->
+    <div class="mt-4">
+        <a href="{{ task_info.url_to_jatos }}">
+            <button type="button" class="btn btn-primary custom-start-task">
+                {% trans "Empezar tarea" %}
+            </button>
+        </a>
+
+        <a href="{{ task_info.baremo_url }}">
+            <button type="button" class="btn btn-outline-primary custom-consult-baremo ms-2">
+                {% trans "Consultar baremos" %}
+            </button>
+        </a>
+    </div>
+
+    <!-- Tabs -->
+    <div>
+        <ul>
+            <li><a href="#info_general">{% trans "Información general" %}</a></li>
+            <li><a href="#info_profesionales">{% trans "Información para profesionales" %}</a></li>
+        </ul>
+    </div>
+
+    <!-- Contenido de tabs -->
+    <div id="info_general">
+        <h3>{% trans "Información general" %}</h3>
+        <p>{{ task_info.general_info }}</p>
+    </div>
+
+    <div id="info_profesionales">
+        <h3>{% trans "Información para profesionales" %}</h3>
+        <p>{{ task_info.professional_info }}</p>
+    </div>
+
+    <!-- Secciones -->
+    <div>
+        <h3>{% trans "Instrucciones" %}</h3>
+        <p>{{ task_info.instructions }}</p>
+    </div>
+
+</div>
+{% endblock %}

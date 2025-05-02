@@ -3,12 +3,13 @@
 <html lang="{{ LANGUAGE_CODE }}">
 <head>
     <meta charset="UTF-8"/>
-    <meta name="description" content="Astro description"/>
     <meta name="viewport" content="width=device-width"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
           crossorigin="anonymous">
+    {% if favicon.img.url %}
     <link rel="icon" href="{{ favicon.img.url }}" type="image/x-icon">
+    {% endif %}
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
@@ -17,22 +18,25 @@
     <div class="row align-items-center">
         <!-- Imagen del header -->
         <div class="col-12 col-md-2 col-sm-12 text-center text-md-start">
-            <a href="/">
-                <img src="{% static 'img/headers-img/IDEL-header-img.png' %}" alt="header_IDEL"
-                     class="img-fluid img-header">
+            <a href="{% url 'index' %}">
+                {{ header_img.url }}
+                {% if header_img %}
+                <img src="{{ header_img.header_img.url }}" alt="header_IDEL" class="img-fluid img-header">
+                {% endif %}
             </a>
         </div>
         <!-- Menú de navegación -->
         <div class="col-12 col-md-8 col-sm-6 d-flex justify-content-center justify-content-md-start mt-3 mt-md-0">
             <nav id="nav-bar">
                 <ul class="nav flex-column flex-md-row">
-                    <li class="nav-item"><a class="nav-link" href="#recommended_projects">{% trans 'Recomendados' %}</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#recommended_projects">{% trans 'Recomendados' %}</a>
+                    </li>
                     <li class="nav-item"><a class="nav-link" href="#projects">{% trans 'Proyectos' %}</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#scale">{% trans 'Baremos' %}</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#investStudies">{% trans 'Investigaciones' %}</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#invest_cardContainer">{% trans 'Sobre nosotros' %}</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contact">{% trans 'Contactanos' %}</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'code_show_scale' %}">{% trans 'Busca tu baremo' %}</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#investStudies">{% trans 'Investigaciones' %}</a>
+                    </li>
+                    <!-- TODO: translate this -->
+                    <li class="nav-item"><a class="nav-link btn-baremo" href="{% url 'code_show_scale' %}">
+                        {% trans 'Busca tu baremo' %}</a></li>
                 </ul>
             </nav>
         </div>
@@ -40,6 +44,7 @@
         <!-- Banderas de idioma -->
         <div class="col-12 col-md-2 col-sm-6 d-flex justify-content-center justify-content-md-end mt-3 mt-md-0">
             <div id="main-nav-bar" class="d-flex">
+                {% csrf_token %}
                 <form action="{% url 'set_language' %}" method="post" style="display:inline;">
                     {% csrf_token %}
                     <input type="hidden" name="next" value="{{ request.path }}">
@@ -67,101 +72,48 @@
 </div>
 {% block content %}{% endblock %}
 <!-- Footer -->
-<footer class="container-fluid bg-light col-12">
-    <!-- Contact Section -->
-    <div class="container">
-        <div id="contact" class="mx-auto">
-            <h3 class="text-center mb-4">{% trans 'Contacto' %}</h3>
-            <p class="text-center">{% trans 'Ponte en contacto con nosotros sobre cualquier problema o duda.' %}</p>
-            <form id="contact-form" class="needs-validation" novalidate>
-                <div class="mb-3">
-                    <input type="email" class="form-control" placeholder="Email" required name="from_name">
-                    <div class="invalid-feedback">{% trans 'Por favor ingresa un email válido.' %}</div>
-                </div>
-                <div class="mb-3">
-                    <textarea class="form-control" placeholder="Comentario" rows="5" required name="message"></textarea>
-                    <div class="invalid-feedback">{% trans 'Por favor ingresa tu comentario.' %}</div>
-                </div>
-                <button type="submit" class="btn btn-primary btn-block mb-5">{% trans 'Enviar' %}</button>
-            </form>
+<footer class="container-fluid bg-light mt-5 py-4">
+    <div class="row text-center text-md-start px-3">
+        <!-- Contacto -->
+        <div class="col-12 col-md-3 mb-3">
+            <h6>{% trans 'Contacto' %}</h6>
+            <p><a href="{% url 'about_us' %}">{% trans '¿Quiénes somos?' %}</a></p>
+            <p><a href="{% url 'contact' %}">{% trans 'Contacta con nosotros' %}</a></p>
         </div>
-        <div class="d-flex flex-column justify-content-center">
-            <h3 class="text-center mb-4">{% trans 'Redes Sociales, Agradecimientos y Políticas' %}</h3>
-            {% if get_first_banner_queryset %}
-            <div class="text-center mb-4">
-                <div class="col-12">
-                    {% if get_first_banner_queryset.facebook %}
-                    <a href="{{ footer.facebook }}">
-                        <img src="{% static 'img/social_media/Facebook.png' %}"
-                             alt="facebook_img" width="30" height="30"/>
-                    </a>
-                    {% endif %}
-                    {% if get_first_banner_queryset.instagram %}
-                    <a href="{{ footer.instagram }}">
-                        <img src="{% static 'img/social_media/Instagram.png' %}"
-                             alt="instagram_img" width="30" height="30"/>
-                    </a>
-                    {% endif %}
-                    {% if get_first_banner_queryset.threads %}
-                    <a href="{{ footer.threads }}">
-                        <img src="{% static 'img/social_media/Threads.png' %}"
-                             alt="threads_img" width="30" height="30"/>
-                    </a>
-                    {% endif %}
-                    {% if get_first_banner_queryset.youtube %}
-                    <a href="{{ footer.youtube }}">
-                        <img src="{% static 'img/social_media/youtube_logo.png' %}"
-                             alt="youtube_img" width="30" height="30"/>
-                    </a>
-                    {% endif %}
-                    {% if get_first_banner_queryset.x_twitter %}
-                    <a href="{{ footer.x_twitter }}">
-                        <img src="{% static 'img/social_media/x_logo.png' %}"
-                             alt="x_img" width="30" height="30"/>
-                    </a>
-                    {% endif %}
-                </div>
-                {% if get_first_banner_queryset.banner_img %}
-                <div class="col-12">
-                    <img src="{{ footer.banner_img.url }}" alt="banner img"/>
-                </div>
-                {% endif %}
-                <div class="col-12">
-                    <a class="col-6" href="{{ footer.privacy_url }}">
-                        <p class="policy">{% trans 'Politicas de privacidad' %}</p>
-                    </a>
-                    <a class="col-6" href="{{ footer.cookies_policy }}">
-                        <p class="policy">{% trans 'Politicas de cookies' %}</p>
-                    </a>
-                </div>
-            </div>
-            {% else %}
-            <div class="text-center mb-4">
-                <p>{% trans 'No se ha configurado un footer' %}</p>
-            </div>
+
+        <!-- Ayuda -->
+        <div class="col-12 col-md-3 mb-3">
+            <h6>{% trans 'Ayuda' %}</h6>
+            <p><a href="{% url 'chatbot_testing' %}">{% trans 'Pregunta a nuestro chatbot' %}</a></p>
+        </div>
+
+        <!-- Legal -->
+        <div class="col-12 col-md-3 mb-3">
+            <h6>{% trans 'Legal' %}</h6>
+            <p><a href="{{ footer.privacy_url }}">{% trans 'Privacy policy' %}</a></p>
+            <p><a href="{{ footer.cookies_policy }}">{% trans 'Cookie policy' %}</a></p>
+        </div>
+
+        <!-- Financiación -->
+        <div class="col-12 col-md-3 mb-3 text-md-end">
+            <h6>{% trans 'Financiación' %}</h6>
+            {% if footer.banner_img %}
+            <img src="{{ footer.banner_img.url }}" alt="Financiación" class="img-fluid"/>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="row justify-content-center text-center mt-4">
+        <div class="col-12">
+            {% if header_img %}
+            <img src="{{ header_img.header_img.url }}" alt="header_IDEL" class="img-fluid img-header">
             {% endif %}
         </div>
     </div>
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
         integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
-        crossorigin="anonymous"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser00000000000000000000000@4/dist/email.min.js"></script>
-<script type="text/javascript">
-    document.addEventListener('DOMContentLoaded', function() {
-        emailjs.init("Nf7slTmEwNvUSqS2F");
-
-        document.getElementById('contact-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            emailjs.sendForm('service_bwh4rgd', 'template_4i439oa', this)
-                .then(function(response) {
-                    alert('¡El mensaje se ha enviado correctamente!');
-                }, function(error) {
-                    alert('Hubo un problema al enviar el mensaje. Por favor, inténtelo de nuevo.');
-                });
-        });
-    });
+        crossorigin="anonymous">
 </script>
 </body>
 </html>
@@ -197,7 +149,7 @@
             monospace;
     }
 
-    h3 {
+    h3, h6 {
         color: #e22658;
     }
 
@@ -242,11 +194,74 @@
     }
 
     #nav-bar .nav-link {
-        color: black;
+        color: #e22658;
         padding: 0.5rem 1rem;
     }
 
     #main-nav-bar form {
         margin-left: 5px;
     }
+
+    .btn-baremo {
+        display: inline-block;
+        background-color: #D8BFD8;
+        color: #4B0082;
+        border-radius: 24px;
+        border: 1px solid #4B0082;
+        text-align: center;
+        transition: all 0.3s ease;
+    }
+
+    .btn-baremo:hover {
+        background-color: #CDA6CD; /* Un tono más oscuro al pasar el cursor */
+        color: white;
+        border-color: black;
+        text-decoration: none;
+    }
+
+    .img-header {
+        max-width: 300px;
+        height: auto;
+    }
+
+    @media (min-width: 768px) {
+        .img-header {
+            max-width: 300px;
+            margin-top: 2%;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .img-header {
+            max-width: 200px;
+            margin-top: 2%;
+        }
+    }
+    .custom-start-task {
+        background-color: #aa00aa;  /* morado fuerte */
+        border-color: #aa00aa;
+        color: white;
+        border-radius: 25px;
+        padding: 8px 24px;
+        font-weight: bold;
+    }
+
+    .custom-consult-baremo {
+        border-color: #aa00aa;
+        color: #aa00aa;
+        border-radius: 25px;
+        padding: 8px 24px;
+        font-weight: bold;
+        background-color: white;
+    }
+
+    .custom-consult-baremo:hover {
+        background-color: #f8e6f8;
+    }
+
+    .custom-start-task:hover {
+        background-color: #880088;
+        border-color: #880088;
+    }
+
 </style>

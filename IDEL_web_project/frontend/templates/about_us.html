@@ -1,0 +1,20 @@
+{% extends 'layout.html' %}
+{% load i18n %}
+{% block title %}OpenAT{% endblock %}
+{% block content %}
+<div id="main_content" class="container mt-5">
+    <!-- About Section -->
+    <div>
+        <h3>{% trans 'Sobre nosotros' %}</h3>
+        <p>
+            {{ about_us_content.description }}
+        </p>
+    </div>
+    <!-- End page content -->
+</div>
+<style>
+    #recommended_projects {
+        margin-top: 80px;
+    }
+</style>
+{% endblock %}

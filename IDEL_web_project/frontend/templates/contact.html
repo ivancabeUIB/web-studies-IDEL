@@ -1,0 +1,37 @@
+{% extends 'layout.html' %}
+{% load i18n %}
+{% block title %}OpenAT{% endblock %}
+{% block content %}
+<div id="contact" class="mx-auto container mt-5">
+    <h3 class="text-center mb-4">{% trans 'Contacto' %}</h3>
+    <p class="text-center">{% trans 'Ponte en contacto con nosotros sobre cualquier problema o duda.' %}</p>
+    <form id="contact-form" class="needs-validation" novalidate>
+        <div class="mb-3">
+            <input type="email" class="form-control" placeholder="Email" required name="from_name">
+            <div class="invalid-feedback">{% trans 'Por favor ingresa un email válido.' %}</div>
+        </div>
+        <div class="mb-3">
+            <textarea class="form-control" placeholder="Comentario" rows="5" required name="message"></textarea>
+            <div class="invalid-feedback">{% trans 'Por favor ingresa tu comentario.' %}</div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block mb-5">{% trans 'Enviar' %}</button>
+    </form>
+</div>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser00000000000000000000000@4/dist/email.min.js"></script>
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function() {
+        emailjs.init("Nf7slTmEwNvUSqS2F");
+
+        document.getElementById('contact-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            emailjs.sendForm('service_bwh4rgd', 'template_4i439oa', this)
+                .then(function(response) {
+                    alert('¡El mensaje se ha enviado correctamente!');
+                }, function(error) {
+                    alert('Hubo un problema al enviar el mensaje. Por favor, inténtelo de nuevo.');
+                });
+        });
+    });
+</script>
+{% endblock %}
