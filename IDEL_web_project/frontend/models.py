@@ -21,6 +21,7 @@ class Task(TranslatableModel):
     translations = TranslatedFields(
         name=models.CharField(max_length=150, verbose_name=_('Name')),
         description=models.TextField(verbose_name=_('Description')),
+        general_info=models.TextField(verbose_name=_('Información General'), default="")
     )
     photo = models.ImageField(upload_to='cards-img/', null=True, blank=True)
     url_to_jatos = models.URLField(max_length=200, default='')
