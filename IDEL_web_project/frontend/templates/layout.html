@@ -19,6 +19,7 @@
         <!-- Imagen del header -->
         <div class="col-12 col-md-2 col-sm-12 text-center text-md-start">
             <a href="{% url 'index' %}">
+                {{ header_img.url }}
                 {% if header_img %}
                 <img src="{{ header_img.header_img.url }}" alt="header_IDEL" class="img-fluid img-header">
                 {% endif %}
@@ -28,11 +29,14 @@
         <div class="col-12 col-md-8 col-sm-6 d-flex justify-content-center justify-content-md-start mt-3 mt-md-0">
             <nav id="nav-bar">
                 <ul class="nav flex-column flex-md-row">
-                    <li class="nav-item"><a class="nav-link" href="#recommended_projects">{% trans 'Recomendados' %}</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#recommended_projects">{% trans 'Recomendados' %}</a>
+                    </li>
                     <li class="nav-item"><a class="nav-link" href="#projects">{% trans 'Proyectos' %}</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#investStudies">{% trans 'Investigaciones' %}</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#investStudies">{% trans 'Investigaciones' %}</a>
+                    </li>
                     <!-- TODO: translate this -->
-                    <li class="nav-item"><a class="nav-link btn-baremo" href="{% url 'code_show_scale' %}">{% trans 'Busca tu baremo' %}</a></li>
+                    <li class="nav-item"><a class="nav-link btn-baremo" href="{% url 'code_show_scale' %}">
+                        {% trans 'Busca tu baremo' %}</a></li>
                 </ul>
             </nav>
         </div>
@@ -68,66 +72,41 @@
 </div>
 {% block content %}{% endblock %}
 <!-- Footer -->
-<footer class="container-fluid bg-light col-12">
-    <!-- Contact Section -->
-    <div class="container">
-        <div class="d-flex flex-column justify-content-center">
-            <h3 class="text-center mb-4 mt-4">{% trans 'Redes Sociales, Agradecimientos y Políticas' %}</h3>
-            <p class="nav-item"><a class="nav-link policy" href="{% url 'about_us' %}">{% trans 'Sobre nosotros' %}</a></p>
-            <!-- TODO: translate this -->
-            <p class="nav-item"><a class="nav-link policy" href="{% url 'contact' %}">{% trans 'Contactanos' %}</a></p>
-            {% if footer %}
-            <div class="text-center mb-4">
-                <div class="col-12">
-                    {% if footer.facebook %}
-                    <a href="{{ footer.facebook }}">
-                        <img src="{% static 'img/social_media/Facebook.png' %}"
-                             alt="facebook_img" width="30" height="30"/>
-                    </a>
-                    {% endif %}
-                    {% if footer.instagram %}
-                    <a href="{{ footer.instagram }}">
-                        <img src="{% static 'img/social_media/Instagram.png' %}"
-                             alt="instagram_img" width="30" height="30"/>
-                    </a>
-                    {% endif %}
-                    {% if footer.threads %}
-                    <a href="{{ footer.threads }}">
-                        <img src="{% static 'img/social_media/Threads.png' %}"
-                             alt="threads_img" width="30" height="30"/>
-                    </a>
-                    {% endif %}
-                    {% if footer.youtube %}
-                    <a href="{{ footer.youtube }}">
-                        <img src="{% static 'img/social_media/youtube_logo.png' %}"
-                             alt="youtube_img" width="30" height="30"/>
-                    </a>
-                    {% endif %}
-                    {% if footer.x_twitter %}
-                    <a href="{{ footer.x_twitter }}">
-                        <img src="{% static 'img/social_media/x_logo.png' %}"
-                             alt="x_img" width="30" height="30"/>
-                    </a>
-                    {% endif %}
-                </div>
-                {% if footer.banner_img %}
-                <div class="col-12">
-                    <img src="{{ footer.banner_img.url }}" alt="banner img"/>
-                </div>
-                {% endif %}
-                <div class="col-12">
-                    <a class="col-6" href="{{ footer.privacy_url }}">
-                        <p class="policy">{% trans 'Politicas de privacidad' %}</p>
-                    </a>
-                    <a class="col-6" href="{{ footer.cookies_policy }}">
-                        <p class="policy">{% trans 'Politicas de cookies' %}</p>
-                    </a>
-                </div>
-            </div>
-            {% else %}
-            <div class="text-center mb-4">
-                <p>{% trans 'No se ha configurado un footer' %}</p>
-            </div>
+<footer class="container-fluid bg-light mt-5 py-4">
+    <div class="row text-center text-md-start px-3">
+        <!-- Contacto -->
+        <div class="col-12 col-md-3 mb-3">
+            <h6>{% trans 'Contacto' %}</h6>
+            <p><a href="{% url 'about_us' %}">{% trans '¿Quiénes somos?' %}</a></p>
+            <p><a href="{% url 'contact' %}">{% trans 'Contacta con nosotros' %}</a></p>
+        </div>
+
+        <!-- Ayuda -->
+        <div class="col-12 col-md-3 mb-3">
+            <h6>{% trans 'Ayuda' %}</h6>
+            <p><a href="{% url 'chatbot_testing' %}">{% trans 'Pregunta a nuestro chatbot' %}</a></p>
+        </div>
+
+        <!-- Legal -->
+        <div class="col-12 col-md-3 mb-3">
+            <h6>{% trans 'Legal' %}</h6>
+            <p><a href="{{ footer.privacy_url }}">{% trans 'Privacy policy' %}</a></p>
+            <p><a href="{{ footer.cookies_policy }}">{% trans 'Cookie policy' %}</a></p>
+        </div>
+
+        <!-- Financiación -->
+        <div class="col-12 col-md-3 mb-3 text-md-end">
+            <h6>{% trans 'Financiación' %}</h6>
+            {% if footer.banner_img %}
+            <img src="{{ footer.banner_img.url }}" alt="Financiación" class="img-fluid"/>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="row justify-content-center text-center mt-4">
+        <div class="col-12">
+            {% if header_img %}
+            <img src="{{ header_img.header_img.url }}" alt="header_IDEL" class="img-fluid img-header">
             {% endif %}
         </div>
     </div>
@@ -170,7 +149,7 @@
             monospace;
     }
 
-    h3 {
+    h3, h6 {
         color: #e22658;
     }
 
@@ -257,6 +236,32 @@
             max-width: 200px;
             margin-top: 2%;
         }
+    }
+    .custom-start-task {
+        background-color: #aa00aa;  /* morado fuerte */
+        border-color: #aa00aa;
+        color: white;
+        border-radius: 25px;
+        padding: 8px 24px;
+        font-weight: bold;
+    }
+
+    .custom-consult-baremo {
+        border-color: #aa00aa;
+        color: #aa00aa;
+        border-radius: 25px;
+        padding: 8px 24px;
+        font-weight: bold;
+        background-color: white;
+    }
+
+    .custom-consult-baremo:hover {
+        background-color: #f8e6f8;
+    }
+
+    .custom-start-task:hover {
+        background-color: #880088;
+        border-color: #880088;
     }
 
 </style>
