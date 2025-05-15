@@ -2,13 +2,12 @@ from io import BytesIO
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.views.generic.base import TemplateView
-from .models import Project, Scale, Task, FooterBanner, InvestStudies, HeaderImage, AboutUsContent
+from .models import Project, Task, InvestStudies, AboutUsContent
 import json
 import zipfile
 import requests
 from django.shortcuts import render
-from django.views import View
-from django.conf import settings
+
 
 class IndexView(TemplateView):
     template_name = "index.html"
@@ -17,7 +16,6 @@ class IndexView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['projects'] = Project.objects.filter(is_active=True)
         context['tasks'] = Task.objects.filter(is_active=True)
-        context['scales'] = Scale.objects.filter(is_active=True)
         context['investStudies'] = InvestStudies.objects.filter(is_active=True)
 
         recommended_items_all = {
@@ -142,6 +140,3 @@ class ObtenerConvertirJzipGraficarView(TemplateView): #TODO:Separar responsabili
 
         print(f'datos finales: {datos_generales}')
         return datos_generales
-
-class TestStatisticsView(TemplateView):
-    template_name = 'statistic.html'
