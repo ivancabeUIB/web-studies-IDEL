@@ -17,6 +17,7 @@ Including another URLconf
 from frontend.views import IndexView, AboutUsContentView, ContactView, TaskView, InvestView, ProjectView
 from users_code_scale.views import CodeForScaleView
 from chatbot_ai.views import ChatbotAPI, ChatbotTesting
+from frontend.views import ObtenerConvertirJzipGraficarView,TestStatisticsView
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
@@ -34,6 +35,8 @@ urlpatterns = [
     path('project/<int:project_id>/', ProjectView.as_view(), name='project'),
     path('statistics', CodeForScaleView.as_view(), name="code_show_scale"),
     path('chatbot_testing', ChatbotTesting.as_view(), name="chatbot_testing")
+    path('testgrafic/', ObtenerConvertirJzipGraficarView.as_view(), name="testgrafic"),
+    path('statistics/', TestStatisticsView.as_view(), name="statistics")
 ]
 
 if settings.DEBUG:
