@@ -34,7 +34,7 @@ urlpatterns = [
     path('investstudies/<int:invest_id>/', InvestView.as_view(), name='investstudies'),
     path('project/<int:project_id>/', ProjectView.as_view(), name='project'),
     path('statistics', CodeForScaleView.as_view(), name="code_show_scale"),
-    path('chatbot_testing', ChatbotTesting.as_view(), name="chatbot_testing")
+    path('chatbot_testing', ChatbotTesting.as_view(), name="chatbot_testing"),
     path('testgrafic/', ObtenerConvertirJzipGraficarView.as_view(), name="testgrafic"),
     path('statistics/', TestStatisticsView.as_view(), name="statistics")
 ]
