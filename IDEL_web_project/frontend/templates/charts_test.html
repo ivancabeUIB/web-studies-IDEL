@@ -3,49 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <title>Title</title>
 </head>
 <body>
-  <p>Charts Testing</p>
-  <div id="chart_div" style="width: 900px; height: 500px;"></div>
-<script type="text/javascript">
-    google.charts.load('current', {'packages':['corechart']});
-    google.charts.setOnLoadCallback(drawChart);
+<p>Charts Testing</p>
+<div id="grafico" style="width: 900px; height: 500px;"></div>
+<!-- const accuracies = {{ datos_json|safe }}; -->
+<script>
+    const accuracies = [89.5, 91.2, 92.7, 95.3, 96.8, 98.1, 99.5,
+     89.9, 97.6, 94.2, 98.9, 99.9, 97.4, 97.1,89.5, 91.2, 92.7,
+     95.3, 96.8, 98.1, 99.5, 85.3, 97.6, 94.2, 98.9, 99.9, 80.4,
+     97.1, 93.8, 94.9, 96.5, 97.3, 98.6, 99.2, 100.0, 96.1, 95.5,
+     97.9, 98.7, 99.8, 99.6, 96.1, 97.4, 98.4, 99.1, 95.0, 94.5, 96.7];
 
-    function drawChart() {
-      // Parseamos los datos pasados desde Django
-      const datos = {{ datos_json|safe }};
+    const trace = {
+          x: accuracies,
+          type: 'histogram',
+          marker: {
+            color: 'skyblue',
+            line: {
+                color: 'grey',
+                width: 1
+            }
+          },
+          xbins: {
+            start: 0,
+            end: 100,
+            size: 0.5
+          }
+    };
 
-      // Creamos una tabla de datos para Google Charts
-      const data = new google.visualization.DataTable();
-      data.addColumn('number', 'Tiempo de Respuesta SAMA');
+    const layout = {
+      title: 'Histograma de Accuracy',
+      xaxis: { title: 'Accuracy (%)' },
+      yaxis: { title: 'Frecuencia' },
+      shapes: [
+        {
+          type: 'line',
+          x0: 99.5,
+          x1: 99.5,
+          y0: 0,
+          y1: 1,
+          yref: 'paper',  // para que y1 = 1 signifique "hasta arriba del gráfico"
+          line: {
+            color: 'red',
+            width: 2,
+            dash: 'dashdot'
+          }
+        }
+      ],
+      annotations: [
+        {
+          x: 99.5,
+          y: 1,
+          yref: 'paper',
+          text: 'Aquí estás tu: 99.5',
+          showarrow: false,
+          font: {
+            color: 'red',
+            size: 12
+          },
+          xanchor: 'left'
+        }
+      ]
+    };
 
-      // Agregamos solo los valores de `response_time_SAMA_keyboard_response` al histograma
-      datos.forEach(entry => {
-        data.addRow([entry.response_time_SAMA_keyboard_response]);
-      });
-
-      // Opciones de configuración para el histograma
-      const options = {
-        title: 'Distribución de Tiempos de Respuesta SAMA',
-        legend: { position: 'none' },
-        hAxis: {
-          title: 'Tiempo de Respuesta (ms)',
-          maxValue: 1000,
-        },
-        histogram: {
-          lastBucketPercentile: 10,
-        },
-        vAxis: {
-          title: 'Frecuencia',
-        },
-      };
-
-      // Dibujar el histograma
-      const chart = new google.visualization.Histogram(document.getElementById('chart_div'));
-      chart.draw(data, options);
-    }
-  </script>
+    Plotly.newPlot('grafico', [trace], layout);
+</script>
 <p>
     {{ datos_json }}
 </p>

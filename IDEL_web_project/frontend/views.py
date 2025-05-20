@@ -85,7 +85,7 @@ class ObtenerConvertirJzipGraficarView(TemplateView):
         token = 'jap_aSVg4gkMX5rAdcjB8JiGvIL5ZxN6x7I7bfe0b'
 
         try:
-            response = self.make_request(jatos_api_url, id_study, token)
+            response = self.make_data_request(jatos_api_url, id_study, token)
             datos_mapeo_general = self.unzip_general_maping(BytesIO(response.content))
 
             return render(request, 'charts_test.html', {'datos_json': json.dumps(datos_mapeo_general)})
@@ -93,7 +93,7 @@ class ObtenerConvertirJzipGraficarView(TemplateView):
         except requests.exceptions.RequestException as e:
             return JsonResponse({'error': str(e)}, status=400)
 
-    def make_request(self,jatos_api_url, id_study,token):
+    def make_data_request(self,jatos_api_url, id_study,token):
         url = f"{jatos_api_url}{id_study}"
         headers = {
             'Authorization': f'Bearer {token}',
