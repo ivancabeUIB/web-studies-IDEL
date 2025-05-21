@@ -1,24 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <title>Title</title>
-</head>
-<body>
-<p>Charts Testing</p>
-<div id="grafico" style="width: 900px; height: 500px;"></div>
-<!-- const accuracies = {{ datos_json|safe }}; -->
+{% extends 'layout.html' %}
+{% load i18n %}
+{% block title %}Baremos{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <h3>Charts Testing</h3>
+    <div id="grafico" style="width: 900px; height: 500px;"></div>
+</div>
 <script>
-    const accuracies = [89.5, 91.2, 92.7, 95.3, 96.8, 98.1, 99.5,
-     89.9, 97.6, 94.2, 98.9, 99.9, 97.4, 97.1,89.5, 91.2, 92.7,
-     95.3, 96.8, 98.1, 99.5, 85.3, 97.6, 94.2, 98.9, 99.9, 80.4,
-     97.1, 93.8, 94.9, 96.5, 97.3, 98.6, 99.2, 100.0, 96.1, 95.5,
-     97.9, 98.7, 99.8, 99.6, 96.1, 97.4, 98.4, 99.1, 95.0, 94.5, 96.7];
+    const data = {{ datos_json|safe }};
+    const acc_go = data.acc_go;
 
     const trace = {
-          x: accuracies,
+          x: acc_go,
           type: 'histogram',
           marker: {
             color: 'skyblue',
@@ -35,9 +28,9 @@
     };
 
     const layout = {
-      title: 'Histograma de Accuracy',
-      xaxis: { title: 'Accuracy (%)' },
-      yaxis: { title: 'Frecuencia' },
+      title: '{% trans 'Histograma' %}',
+      xaxis: { title: '{% trans 'Precisión' %} (%)' },
+      yaxis: { title: '{% trans 'Frecuencia' %}' },
       shapes: [
         {
           type: 'line',
@@ -58,7 +51,7 @@
           x: 99.5,
           y: 1,
           yref: 'paper',
-          text: 'Aquí estás tu: 99.5',
+          text: '{% trans 'Aquí estás tu' %}: 99.5',
           showarrow: false,
           font: {
             color: 'red',
@@ -71,9 +64,7 @@
 
     Plotly.newPlot('grafico', [trace], layout);
 </script>
-<p>
+<PRE style="color:red;">
     {{ datos_json }}
-</p>
-</body>
-
-</html>
+</PRE>
+{% endblock %}

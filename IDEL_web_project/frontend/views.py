@@ -75,7 +75,7 @@ class InvestView(TemplateView):
         context['invest_info'] = get_object_or_404(InvestStudies, pk=investstudies_id)
         return context
 
-class ObtenerConvertirJzipGraficarView(TemplateView):
+class GetConvertJzipView(TemplateView):
     template_name = 'charts_test.html'
     def get(self, request, **kwargs):
 
@@ -87,8 +87,9 @@ class ObtenerConvertirJzipGraficarView(TemplateView):
         try:
             response = self.make_data_request(jatos_api_url, id_study, token)
             datos_mapeo_general = self.unzip_general_maping(BytesIO(response.content))
+            datos_ready = self.specific_maping(datos_mapeo_general, id_study)
 
-            return render(request, 'charts_test.html', {'datos_json': json.dumps(datos_mapeo_general)})
+            return render(request, 'charts_test.html', {'datos_json': json.dumps(datos_ready)})
 
         except requests.exceptions.RequestException as e:
             return JsonResponse({'error': str(e)}, status=400)
@@ -108,7 +109,7 @@ class ObtenerConvertirJzipGraficarView(TemplateView):
 
     def unzip_general_maping(self, archivo_zip):
         """Descomprime el archivo .jzip y combina los datos JSON."""
-        datos_generales = []
+        datos_generales = {}
 
         try:
             with zipfile.ZipFile(archivo_zip, 'r') as archivo_zip:
@@ -116,6 +117,7 @@ class ObtenerConvertirJzipGraficarView(TemplateView):
                 for nombre_archivo in archivo_zip.namelist():
 
                     if nombre_archivo.endswith('.txt'):
+
                         with archivo_zip.open(nombre_archivo) as archivo_txt:
                             contenido = archivo_txt.read().decode('utf-8')
 
@@ -123,19 +125,21 @@ class ObtenerConvertirJzipGraficarView(TemplateView):
                                 datos = json.loads(contenido)
                                 if 'data' in datos and 'context' in datos:
                                     study_result_id = datos['context'].get('jatosStudyResultId')
-                                    dic_persona_respondiendo = {f'StudyResultId_{study_result_id}':{}}
+                                    clave = f'StudyResultId_{study_result_id}'
                                     dic_datos_persona = {'data':[], 'context':{}}
+
                                     for item,value in datos['context'].items():
                                         dic_datos_persona['context'][item] = value
+
                                     for respuesta in datos['data']:
                                         if 'mail' in respuesta:
                                             dic_datos_persona['context']['mail'] = respuesta['mail']
                                         else:
                                             dic_datos_persona['data'].append(respuesta)
+
                                     if not 'mail' in dic_datos_persona['context']:
                                         dic_datos_persona['context']['mail'] = ""
-                                    dic_persona_respondiendo[f'StudyResultId_{study_result_id}']= dic_datos_persona
-                                    datos_generales.append(dic_persona_respondiendo)
+                                    datos_generales[clave]= dic_datos_persona
 
                             except json.JSONDecodeError:
                                 print("No hay una estructura JSON correcta")
@@ -143,5 +147,42 @@ class ObtenerConvertirJzipGraficarView(TemplateView):
         except Exception as e:
             print(f"Error al descomprimir el archivo .jzip: {str(e)}")
 
-        print(f'datos finales: {len(datos_generales)}')
+        for clave in list(datos_generales.keys())[:2]:
+            print(clave, "→", datos_generales[clave])
         return datos_generales
+
+    def specific_maping(self, datos_generales, id_study):
+        mappings = {
+            38: self.spec_mapping_OSAT,
+            # otros estudios...
+        }
+
+        extractor_func = mappings.get(id_study)
+        if not extractor_func:
+            print(f"No hay extractor definido para el estudio {id_study}")
+            return []
+
+        return extractor_func(datos_generales)
+
+    def spec_mapping_OSAT(self, datos_generales):
+        variables_deseadas = ["mean_rt_go", "d_prima_principal", "acc_go"]
+
+        resultados = {var: [] for var in variables_deseadas}  # diccionario con listas vacías
+
+        for study_results_Id, info in datos_generales.items():
+            data = info.get("data", [])
+            if not data:
+                continue
+
+            ultimo_punto = data[-1]
+
+            if ultimo_punto.get("prueba") == "no":
+                for var in variables_deseadas:
+                    valor = ultimo_punto.get(var)
+                    if valor is not None:
+                        resultados[var].append(valor)
+                    else:
+                        print(f"Hay valores None en {var}")
+
+        return resultados
+
