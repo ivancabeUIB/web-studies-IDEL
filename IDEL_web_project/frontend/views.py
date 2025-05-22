@@ -89,7 +89,7 @@ class GetConvertJzipView(TemplateView):
             datos_mapeo_general = self.unzip_general_maping(BytesIO(response.content))
             datos_ready = self.specific_maping(datos_mapeo_general, id_study)
 
-            return render(request, 'charts_test.html', {'datos_json': json.dumps(datos_ready)})
+            return render(request, 'charts_test.html', {'datos_json': json.dumps(datos_ready), 'datos_generales':json.dumps(datos_mapeo_general)})
 
         except requests.exceptions.RequestException as e:
             return JsonResponse({'error': str(e)}, status=400)
@@ -147,8 +147,8 @@ class GetConvertJzipView(TemplateView):
         except Exception as e:
             print(f"Error al descomprimir el archivo .jzip: {str(e)}")
 
-        for clave in list(datos_generales.keys())[:2]:
-            print(clave, "→", datos_generales[clave])
+        #for clave in list(datos_generales.keys())[:2]:
+            #print(clave, "→", datos_generales[clave])
         return datos_generales
 
     def specific_maping(self, datos_generales, id_study):
@@ -166,23 +166,37 @@ class GetConvertJzipView(TemplateView):
 
     def spec_mapping_OSAT(self, datos_generales):
         variables_deseadas = ["mean_rt_go", "d_prima_principal", "acc_go"]
+        variables_dependientes = ["genero","ciclos"]
 
-        resultados = {var: [] for var in variables_deseadas}  # diccionario con listas vacías
+        resultados = {var: [] for var in variables_deseadas + variables_dependientes}
 
         for study_results_Id, info in datos_generales.items():
             data = info.get("data", [])
             if not data:
+                print(f"No hay 'data': en {study_results_Id}")
                 continue
 
             ultimo_punto = data[-1]
+            punto_inicio = data[0]
 
-            if ultimo_punto.get("prueba") == "no":
+            # 1. Extraer las dependientes (no requieren condición)
+            for var in variables_dependientes:
+                valor = punto_inicio.get(var)
+                if valor is not None:
+                    resultados[var].append(valor)
+                else:
+                    print(f"Hay valor None en {var} de {study_results_Id}")
+
+            # 2. Extraer las deseadas solo si se completó la tarea
+            if ultimo_punto.get('prueba') == "no":
                 for var in variables_deseadas:
                     valor = ultimo_punto.get(var)
                     if valor is not None:
                         resultados[var].append(valor)
                     else:
-                        print(f"Hay valores None en {var}")
+                        print(f"{var} es None en {study_results_Id}")
+            else:
+                print(f"{study_results_Id} no llegó al final de la tarea")
 
         return resultados
 

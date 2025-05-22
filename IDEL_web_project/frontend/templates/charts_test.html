@@ -1,9 +1,9 @@
 {% extends 'layout.html' %}
 {% load i18n %}
-{% block title %}Baremos{% endblock %}
+{% block title %}Baremos generales{% endblock %}
 {% block content %}
 <div class="container mt-5">
-    <h3>Charts Testing</h3>
+    <h3>Baremos generales</h3>
     <div id="grafico" style="width: 900px; height: 500px;"></div>
 </div>
 <script>
@@ -67,4 +67,7 @@
 <PRE style="color:red;">
     {{ datos_json }}
 </PRE>
+<p>
+    {{ datos_generales }}
+</p>
 {% endblock %}
