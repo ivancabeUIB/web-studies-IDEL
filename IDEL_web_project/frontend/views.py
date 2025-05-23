@@ -165,7 +165,9 @@ class GetConvertJzipView(TemplateView):
         return extractor_func(datos_generales)
 
     def spec_mapping_OSAT(self, datos_generales):
-        variables_deseadas = ["mean_rt_go", "d_prima_principal", "acc_go"]
+        variables_deseadas = ["mean_rt_go", "d_prima_principal","A_prima_principal",
+                              "beta_principal","acc_no_go","count_omision_go","acc_go","perseveracion",
+                              "inversion", "confusion", "distraccion", "impulsividad", "azar"]
         variables_dependientes = ["genero","ciclos"]
 
         resultados = {var: [] for var in variables_deseadas + variables_dependientes}
@@ -179,22 +181,21 @@ class GetConvertJzipView(TemplateView):
             ultimo_punto = data[-1]
             punto_inicio = data[0]
 
-            # 1. Extraer las dependientes (no requieren condición)
-            for var in variables_dependientes:
-                valor = punto_inicio.get(var)
-                if valor is not None:
-                    resultados[var].append(valor)
-                else:
-                    print(f"Hay valor None en {var} de {study_results_Id}")
-
-            # 2. Extraer las deseadas solo si se completó la tarea
+            # Extraer las deseadas solo si se completó la tarea
             if ultimo_punto.get('prueba') == "no":
                 for var in variables_deseadas:
                     valor = ultimo_punto.get(var)
                     if valor is not None:
                         resultados[var].append(valor)
                     else:
-                        print(f"{var} es None en {study_results_Id}")
+                        print(f"Hay valor None en {var} de {study_results_Id}")
+
+                for var in variables_dependientes: # Necesita pasar el filtro prueba=no para que var.lenght sean todos iguales
+                    valor = punto_inicio.get(var)
+                    if valor is not None:
+                        resultados[var].append(valor)
+                    else:
+                        print(f"Hay valor None en {var} de {study_results_Id}")
             else:
                 print(f"{study_results_Id} no llegó al final de la tarea")
 

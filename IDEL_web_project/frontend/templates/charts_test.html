@@ -3,66 +3,235 @@
 {% block title %}Baremos generales{% endblock %}
 {% block content %}
 <div class="container mt-5">
-    <h3>Baremos generales</h3>
-    <div id="grafico" style="width: 900px; height: 500px;"></div>
+    <label for="genero1">Género:</label>
+    <select id="genero1">
+        <option value="todos">Todos</option>
+        <option value="masculino">Masculino</option>
+        <option value="femenino">Femenino</option>
+        <option value="otro">Otro</option>
+
+    </select>
+
+    <label for="ciclo1">Nº de ciclos:</label>
+    <select id="ciclo1">
+        <option value="todos">Todos</option>
+        <option value="1">1 ciclo</option>
+        <option value="2">2 ciclos</option>
+        <option value="3">3 ciclos</option>
+    </select>
+
+    <div id="grafico1" style="width: 500px; height: 400px;"></div>
 </div>
+
+<div class="container mt-5">
+    <label for="genero2">Género:</label>
+    <select id="genero2">
+        <option value="todos">Todos</option>
+        <option value="masculino">Masculino</option>
+        <option value="femenino">Femenino</option>
+        <option value="otro">Otro</option>
+    </select>
+
+    <label for="ciclo2">Nº de ciclo:</label>
+    <select id="ciclo2">
+        <option value="todos">Todos</option>
+        <option value="1">1 ciclo</option>
+        <option value="2">2 ciclos</option>
+        <option value="3">3 ciclos</option>
+    </select>
+
+    <div id="grafico2" style="width: 500px; height: 400px;"></div>
+</div>
+
+<div class="container mt-5">
+    <label for="genero3">Género:</label>
+    <select id="genero3">
+        <option value="todos">Todos</option>
+        <option value="masculino">Masculino</option>
+        <option value="femenino">Femenino</option>
+        <option value="otro">Otro</option>
+    </select>
+
+    <label for="ciclo3">Nº de ciclo:</label>
+    <select id="ciclo3">
+        <option value="todos">Todos</option>
+        <option value="1">1 ciclo</option>
+        <option value="2">2 ciclos</option>
+        <option value="3">3 ciclos</option>
+    </select>
+
+    <div id="graficoRadar" style="width: 500px; height: 400px;"></div>
+</div>
+
 <script>
     const data = {{ datos_json|safe }};
-    const acc_go = data.acc_go;
 
-    const trace = {
-          x: acc_go,
-          type: 'histogram',
-          marker: {
-            color: 'skyblue',
-            line: {
-                color: 'grey',
-                width: 1
+    function filtrarDatos(variable, generoFiltro, cicloFiltro) {
+        const resultado = [];
+
+        for (let i = 0; i < data[variable].length; i++) {
+            const g = data.genero[i];
+            const c = data.ciclos[i];
+
+            const cumpleGenero = generoFiltro === "todos" || g === generoFiltro;
+            const cumpleCiclo = cicloFiltro === "todos" || c.toString() === cicloFiltro;
+
+            if (cumpleGenero && cumpleCiclo) {
+                resultado.push(data[variable][i]);
             }
-          },
-          xbins: {
-            start: 0,
-            end: 100,
-            size: 0.5
-          }
-    };
-
-    const layout = {
-      title: '{% trans 'Histograma' %}',
-      xaxis: { title: '{% trans 'Precisión' %} (%)' },
-      yaxis: { title: '{% trans 'Frecuencia' %}' },
-      shapes: [
-        {
-          type: 'line',
-          x0: 99.5,
-          x1: 99.5,
-          y0: 0,
-          y1: 1,
-          yref: 'paper',  // para que y1 = 1 signifique "hasta arriba del gráfico"
-          line: {
-            color: 'red',
-            width: 2,
-            dash: 'dashdot'
-          }
         }
-      ],
-      annotations: [
-        {
-          x: 99.5,
-          y: 1,
-          yref: 'paper',
-          text: '{% trans 'Aquí estás tu' %}: 99.5',
-          showarrow: false,
-          font: {
-            color: 'red',
-            size: 12
-          },
-          xanchor: 'left'
-        }
-      ]
-    };
 
-    Plotly.newPlot('grafico', [trace], layout);
+        return resultado;
+    }
+
+    function actualizarGrafico1() {
+        const genero = document.getElementById("genero1").value;
+        const ciclo = document.getElementById("ciclo1").value;
+        const valores = filtrarDatos("acc_go", genero, ciclo);
+
+        const trace = {
+            x: valores,
+            type: 'histogram',
+            marker: {
+                color: 'skyblue',
+                line: {
+                    color: 'grey',
+                    width: 1
+                }
+            },
+            xbins: {
+                start: 0,
+                end: 100,
+                size: 1
+            }
+        };
+
+        const layout = {
+            title: 'Histograma de Precisión de Acierto',
+            xaxis: { title: 'Precisión de acierto (%)' },
+            yaxis: { title: 'Frecuencia' },
+        };
+
+        Plotly.newPlot('grafico1', [trace], layout);
+    }
+
+    function actualizarGrafico2() {
+        const genero = document.getElementById("genero2").value;
+        const ciclo = document.getElementById("ciclo2").value;
+        const valores = filtrarDatos("mean_rt_go", genero, ciclo);
+
+        const trace = {
+            x: valores,
+            type: 'histogram',
+            marker: {
+                color: 'skyblue',
+                line: {
+                    color: 'grey',
+                    width: 1
+                }
+            },
+            xbins: {
+                size: 10
+            }
+        };
+
+        const layout = {
+            title: 'Histograma de Tiempo de Reacción',
+            xaxis: { title: 'Tiempo (ms)' },
+            yaxis: { title: 'Frecuencia' },
+        };
+
+        Plotly.newPlot('grafico2', [trace], layout);
+    }
+
+    function calcularMedia(arr) {
+        if (!arr.length) return 0;
+        const suma = arr.reduce((a, b) => a + b, 0);
+        return suma / arr.length;
+    }
+
+    function filtrarDatosRadar(variable, generoFiltro, cicloFiltro) {
+        const resultado = [];
+
+        for (let i = 0; i < data[variable].length; i++) {
+            const g = data.genero[i];
+            const c = data.ciclos[i];
+
+            const cumpleGenero = generoFiltro === "todos" || g === generoFiltro;
+            const cumpleCiclo = cicloFiltro === "todos" || c.toString() === cicloFiltro;
+
+            if (cumpleGenero && cumpleCiclo) {
+                resultado.push(data[variable][i]);
+            }
+        }
+
+        return resultado;
+    }
+
+    function graficarRadar() {
+        const genero = document.getElementById("genero3").value;
+        const ciclo = document.getElementById("ciclo3").value;
+
+        const variables = [
+            "count_omision_go",
+            "distraccion",
+            "perseveracion",
+            "inversion",
+            "impulsividad",
+            "confusion",
+            "azar"
+        ];
+
+        const nombres_visibles = [
+                "Omisiones",
+                "Distracción",
+                "Perseveración",
+                "Inversión",
+                "Impulsividad",
+                "Confusión",
+                "Azar"
+        ];
+
+        const medias = variables.map(v => {
+            const filtrado = filtrarDatosRadar(v, genero, ciclo);
+            return calcularMedia(filtrado);
+        });
+
+        const trace = {
+            type: 'scatterpolar',
+            r: medias,
+            theta: nombres_visibles,
+            fill: 'toself',
+            name: 'Media aritmética',
+            marker: { color: 'skyblue' }
+        };
+
+        const layout = {
+            polar: {
+                radialaxis: {
+                    visible: true,
+                    range: [0, Math.max(...medias)]
+                }
+            },
+            showlegend: true,
+            title: "Medias de tipos de errores"
+        };
+
+        Plotly.newPlot('graficoRadar', [trace], layout);
+    }
+
+    // Eventos
+    document.getElementById("genero1").addEventListener("change", actualizarGrafico1);
+    document.getElementById("ciclo1").addEventListener("change", actualizarGrafico1);
+    document.getElementById("genero2").addEventListener("change", actualizarGrafico2);
+    document.getElementById("ciclo2").addEventListener("change", actualizarGrafico2);
+    document.getElementById("genero3").addEventListener("change", graficarRadar);
+    document.getElementById("ciclo3").addEventListener("change", graficarRadar);
+
+    // Inicializar
+    actualizarGrafico1();
+    actualizarGrafico2();
+    graficarRadar();
 </script>
 <PRE style="color:red;">
     {{ datos_json }}
