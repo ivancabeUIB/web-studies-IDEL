@@ -21,7 +21,10 @@ class Task(TranslatableModel):
     translations = TranslatedFields(
         name=models.CharField(max_length=150, verbose_name=_('Name')),
         description=models.TextField(verbose_name=_('Description')),
-        general_info=models.TextField(verbose_name=_('Información General'), default="")
+        general_info=models.TextField(verbose_name=_('Información General'), default=""),
+        process_to_evaluate=models.TextField(verbose_name=_('Procesos a evaluar'), default=""),
+        difficulty=models.PositiveIntegerField(verbose_name=_('Dificultad'), default=1),
+        recommended_age=models.PositiveIntegerField(verbose_name=_('Edad Recomendada'), default=1),
     )
     photo = models.ImageField(upload_to='cards-img/', null=True, blank=True)
     url_to_jatos = models.URLField(max_length=200, default='')

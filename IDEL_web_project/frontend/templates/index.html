@@ -2,146 +2,162 @@
 {% load i18n static %}
 {% block title %}OpenAT{% endblock %}
 {% block content %}
-<div id="main_content" class="container mt-5">
+<div id="main_content" class="mt-5">
     <!-- Project Section -->
     {% if recommended_items_all %}
-    <div id="recommended_projects">
-        <h3>{% trans 'Recomendados' %}</h3>
-    </div>
-    <div id="recommended_cardContainer" class="row col-12">
-        {% for model_name, recommended_items in recommended_items_all.items %}
-        {% for recommended in recommended_items %}
-        <div class="col-12 col-md-3">
-            <div class="card border p-3 mb-2">
-                <a href="{% if model_name == 'projects' %}
-                            {% url 'project' recommended.id %}
-                         {% elif model_name == 'tasks' %}
-                            {% url 'task' recommended.id %}
-                         {% elif model_name == 'investstudies' %}
-                            {% url 'investstudies' recommended.id %}
-                         {% endif %}">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-12 text-center">
-                                <p class="mb-0"><b>{{ recommended.name }}</b></p>
+    <section id="recommended_section" class="row panel align-top">
+        <div id="recommended_content">
+            <div id="recommended_projects" class="mb-5">
+                <h3>{% trans 'Recomendados' %}</h3>
+            </div>
+            <div id="recommended_cardContainer" class="row col-12">
+                {% for model_name, recommended_items in recommended_items_all.items %}
+                {% for recommended in recommended_items %}
+                <div class="col-12 col-md-3">
+                    <div class="card border p-3 mb-2">
+                        <a href="{% if model_name == 'projects' %}
+                                    {% url 'project' recommended.id %}
+                                 {% elif model_name == 'tasks' %}
+                                    {% url 'task' recommended.id %}
+                                 {% elif model_name == 'investstudies' %}
+                                    {% url 'investstudies' recommended.id %}
+                                 {% endif %}">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-12 text-center">
+                                        <p class="mb-0"><b>{{ recommended.name }}</b></p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                            {% if recommended.photo %}
+                            <br>
+                            <div class="text-center">
+                                <img src="{{ recommended.photo.url }}" alt="{{ recommended.name }}" class="img-fluid"/>
+                            </div>
+                            {% endif %}
+                            {% if recommended.description %}
+                            <div class="description mt-2">
+                                <p>{{ recommended.description }}</p>
+                            </div>
+                            {% endif %}
+                        </a>
                     </div>
-                    {% if recommended.photo %}
-                    <br>
-                    <div class="text-center">
-                        <img src="{{ recommended.photo.url }}" alt="{{ recommended.name }}" class="img-fluid"/>
-                    </div>
-                    {% endif %}
-                    {% if recommended.description %}
-                    <div class="description mt-2">
-                        <p>{{ recommended.description }}</p>
-                    </div>
-                    {% endif %}
-                </a>
+                </div>
+                {% endfor %}
+                {% endfor %}
             </div>
         </div>
-        {% endfor %}
-        {% endfor %}
-    </div>
+    </section>
     {% endif %}
 
     {% if projects %}
-    <div id="projects">
-        <h3>{% trans 'Proyectos' %}</h3>
-    </div>
-    <div id="projects_cardContainer" class="row">
-        {% for project in projects %}
-        <div class="col-12 col-md-4">
-            <div class="card border p-3 mt-2 mb-2">
-                <a href="{{ project.url }}">
-                    <div>
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-12 text-center">
-                                    <p class="mb-0"><b>{{ project.name }}</b></p>
+    <section id="project_section" class="row panel align-top">
+        <div id="project_content">
+            <div id="projects" class="mb-5">
+                <h3>{% trans 'Proyectos' %}</h3>
+            </div>
+            <div id="projects_cardContainer" class="row mb-5">
+                {% for project in projects %}
+                <div class="col-12 col-md-4">
+                    <div class="card border p-3 mt-2 mb-2">
+                        <a href="{{ project.url }}">
+                            <div>
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-12 text-center">
+                                            <p class="mb-0"><b>{{ project.name }}</b></p>
+                                        </div>
+                                    </div>
                                 </div>
+                                {% if project.photo %}
+                                <br>
+                                <div class="text-center">
+                                    <img src="{{ project.photo.url }}" alt="{{ project.name }}" class="img-fluid"/>
+                                </div>
+                                {% endif %}
                             </div>
-                        </div>
-                        {% if project.photo %}
-                        <br>
-                        <div class="text-center">
-                            <img src="{{ project.photo.url }}" alt="{{ project.name }}" class="img-fluid"/>
-                        </div>
-                        {% endif %}
+                        </a>
                     </div>
-                </a>
+                </div>
+                {% endfor %}
             </div>
         </div>
-        {% endfor %}
-    </div>
+    </section>
     {% endif %}
 
     {% if tasks %}
-    <div id="task" class="mt-4">
-        <h3>{% trans 'Tareas' %}</h3>
-    </div>
-    <div id="task_cardContainer" class="row mb-5">
-        {% for task in tasks %}
-        <div class="col-12 col-md-4">
-            <div class="card border p-3 mt-2 mb-2">
-                <a href="{% url 'task' task_id=task.id %}">
-                    <div>
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-12 text-center">
-                                    <p class="mb-0"><b>{{ task.name }}</b></p>
+    <section id="task_section" class="row panel align-top">
+        <div id="task_content">
+            <div id="task" class="mb-5">
+                <h3>{% trans 'Tareas' %}</h3>
+            </div>
+            <div id="task_cardContainer" class="row mb-5">
+                {% for task in tasks %}
+                <div class="col-12 col-md-4">
+                    <div class="card border p-3 mt-2 mb-2">
+                        <a href="{% url 'task' task_id=task.id %}">
+                            <div>
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-12 text-center">
+                                            <p class="mb-0"><b>{{ task.name }}</b></p>
+                                        </div>
+                                    </div>
                                 </div>
+                                {% if task.photo %}
+                                <br>
+                                <div class="text-center">
+                                    <img src="{{ task.photo.url }}" alt="{{ project.name }}" class="img-fluid"/>
+                                </div>
+                                {% endif %}
+                                {% if task.description %}
+                                <div class="description mt-2">
+                                    <p>{{ task.description }}</p>
+                                </div>
+                                {% endif %}
                             </div>
-                        </div>
-                        {% if task.photo %}
-                        <br>
-                        <div class="text-center">
-                            <img src="{{ task.photo.url }}" alt="{{ project.name }}" class="img-fluid"/>
-                        </div>
-                        {% endif %}
-                        {% if task.description %}
-                        <div class="description mt-2">
-                            <p>{{ task.description }}</p>
-                        </div>
-                        {% endif %}
+                        </a>
                     </div>
-                </a>
+                </div>
+                {% endfor %}
             </div>
         </div>
-        {% endfor %}
-    </div>
+    </section>
     {% endif %}
 
     {% if investStudies %}
-    <div id="investStudies">
-        <h3>{% trans 'Investigaciones' %}</h3>
-    </div>
-    <div id="invest_cardContainer" class="row">
-        {% for invest in investStudies %}
-        <div class="col-12 col-md-4">
-            <div class="card border p-3 mt-2 mb-2">
-                <a href="{{ invest.url }}">
-                    <div>
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-12 text-center">
-                                    <p class="mb-0"><b>{{ invest.name }}</b></p>
+    <section id="invest_section" class="row panel align-top">
+        <div id="invest_content">
+            <div id="investStudies" class="mb-5">
+            <h3>{% trans 'Investigaciones' %}</h3>
+        </div>
+            <div id="invest_cardContainer" class="row mb-5">
+            {% for invest in investStudies %}
+            <div class="col-12 col-md-4">
+                <div class="card border p-3 mt-2 mb-2">
+                    <a href="{{ invest.url }}">
+                        <div>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-12 text-center">
+                                        <p class="mb-0"><b>{{ invest.name }}</b></p>
+                                    </div>
                                 </div>
                             </div>
+                            {% if invest.photo %}
+                            <br>
+                            <div class="text-center">
+                                <img src="{{ invest.photo.url }}" alt="{{ invest.name }}" class="img-fluid"/>
+                            </div>
+                            {% endif %}
                         </div>
-                        {% if invest.photo %}
-                        <br>
-                        <div class="text-center">
-                            <img src="{{ invest.photo.url }}" alt="{{ invest.name }}" class="img-fluid"/>
-                        </div>
-                        {% endif %}
-                    </div>
-                </a>
+                    </a>
+                </div>
             </div>
+            {% endfor %}
         </div>
-        {% endfor %}
-    </div>
+        </div>
+    </section>
     {% endif %}
     <!-- End page content -->
 </div>
@@ -235,8 +251,92 @@
       });
 </script>
 <style>
-    #recommended_projects {
-        margin-top: 80px;
+    .panel {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: 600;
+      font-size: 1.5em;
+      text-align: center;
+      color: white;
+      position: relative;
+      box-sizing: border-box;
+      padding: 10px;
     }
+
+    .panel.align-top {
+      align-items: flex-start;
+    }
+
+    .panel h1 {
+      font-size: 1.8em;
+      color: white;
+      font-weight: 300;
+      margin: 0 auto;
+    }
+    .panel.description {
+      padding-bottom: 60px;
+    }
+    .panel p, .panel li {
+      color: black;
+      font-weight: 400;
+      text-align: left;
+      font-size: 0.8em;
+      line-height: 1.5em;
+      margin: 0.3em 0 1em 0;
+    }
+
+    h1, h2, p, li {
+      max-width: 800px;
+    }
+
+    .scroll-down {
+      bottom:auto;
+      top:6vh;
+      position:relative;
+    }
+
+    #recommended_section {
+        background: linear-gradient(135deg, #D8BFD8, #ffffff);
+        border-radius: 8px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    #project_section {
+        background: linear-gradient(135deg, #D8BFD8, #ffffff);
+        border-radius: 8px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    #task_section {
+        background: linear-gradient(135deg, #ffffff, #D8BFD8);
+        border-radius: 8px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    #invest_section {
+        background: linear-gradient(135deg, #D8BFD8, #ffffff);
+        border-radius: 8px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    /* Opcional: mejora visual para las tarjetas */
+    .card {
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    }
+
 </style>
 {% endblock %}

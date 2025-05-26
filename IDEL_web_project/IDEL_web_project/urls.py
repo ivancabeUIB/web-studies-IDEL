@@ -25,15 +25,15 @@ from django.urls import path, include
 urlpatterns = [
     path('i18n', include('django.conf.urls.i18n')),
     path('api/chatbot', ChatbotAPI.as_view(), name="api_chatbot"),
-    path('admin', admin.site.urls),
+    path('admin/', admin.site.urls),
     path('', IndexView.as_view(), name="index"),
-    path('about_us', AboutUsContentView.as_view(), name="about_us"),
-    path('contact', ContactView.as_view(), name="contact"),
+    path('about_us/', AboutUsContentView.as_view(), name="about_us"),
+    path('contact/', ContactView.as_view(), name="contact"),
     path('task/<int:task_id>/', TaskView.as_view(), name="task"),
     path('investstudies/<int:invest_id>/', InvestView.as_view(), name='investstudies'),
     path('project/<int:project_id>/', ProjectView.as_view(), name='project'),
-    path('statistics', CodeForScaleView.as_view(), name="code_show_scale"),
-    path('chatbot_testing', ChatbotTesting.as_view(), name="chatbot_testing")
+    path('statistics/', CodeForScaleView.as_view(), name="code_show_scale"),
+    path('chatbot_testing/', ChatbotTesting.as_view(), name="chatbot_testing")
 ]
 
 if settings.DEBUG:
